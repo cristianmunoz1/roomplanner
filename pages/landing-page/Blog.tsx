@@ -1,3 +1,4 @@
+"use client"
 import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
@@ -5,7 +6,6 @@ import Container from '@mui/material/Container';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from './Header';
 import MainFeaturedPost from './MainFeaturedPost';
 import FeaturedPost from './FeaturedPost';
@@ -13,6 +13,7 @@ import Main from './Main';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
 import { posts } from '../../const'
+
 
 const sections = [
   { title: 'Technology', url: '#' },
@@ -79,10 +80,11 @@ const sidebar = {
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
+
 const posts_c = [posts[0], posts[1], posts[2]];
 export default function Blog() {
   return (
-   <React.Fragment>
+    <>
       <CssBaseline />
       <Container maxWidth="lg">
         <Header title="Blog" sections={sections} />
@@ -108,6 +110,6 @@ export default function Blog() {
         title="Footer"
         description="Something here to give the footer a purpose!"
       />
-    </React.Fragment>
+    </>
   );
 }
