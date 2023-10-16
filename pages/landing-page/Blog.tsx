@@ -12,9 +12,7 @@ import FeaturedPost from './FeaturedPost';
 import Main from './Main';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
-import post1 from './blog-post.1.md';
-import post2 from './blog-post.2.md';
-import post3 from './blog-post.3.md';
+import { posts } from '../../const'
 
 const sections = [
   { title: 'Technology', url: '#' },
@@ -40,24 +38,20 @@ const mainFeaturedPost = {
 
 const featuredPosts = [
   {
-    title: 'Featured post',
-    date: 'Nov 12',
+    id: 'Featured post',
+    label: 'Featured post',
     description:
       'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random?wallpapers',
-    imageLabel: 'Image Text',
   },
   {
-    title: 'Post title',
-    date: 'Nov 11',
+    id: 'Featured post',
+    label: 'Featured post',
     description:
       'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random?wallpapers',
-    imageLabel: 'Image Text',
   },
 ];
 
-const posts = [post1, post2, post3];
+
 
 const sidebar = {
   title: 'About',
@@ -84,11 +78,11 @@ const sidebar = {
 };
 
 // TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
 
+const posts_c = [posts[0], posts[1], posts[2]];
 export default function Blog() {
   return (
-    <ThemeProvider theme={defaultTheme}>
+   <React.Fragment>
       <CssBaseline />
       <Container maxWidth="lg">
         <Header title="Blog" sections={sections} />
@@ -96,7 +90,7 @@ export default function Blog() {
           <MainFeaturedPost post={mainFeaturedPost} />
           <Grid container spacing={4}>
             {featuredPosts.map((post) => (
-              <FeaturedPost key={post.title} post={post} />
+              <FeaturedPost key={post.id} post={post} />
             ))}
           </Grid>
           <Grid container spacing={5} sx={{ mt: 3 }}>
@@ -114,6 +108,6 @@ export default function Blog() {
         title="Footer"
         description="Something here to give the footer a purpose!"
       />
-    </ThemeProvider>
+    </React.Fragment>
   );
 }
