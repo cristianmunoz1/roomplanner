@@ -1,7 +1,5 @@
 "use client"
-import Image from 'next/image'
-import styles from './page.module.css'
-import Blog from '../pages/landing-page/Blog'
+import Blog from '../pages/landing-page/landing-page'
 
 import {ThemeProvider as NextThemesProvider} from "next-themes";
       

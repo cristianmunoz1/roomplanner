@@ -28,11 +28,9 @@ export default function Main(props: MainProps) {
             </Typography>
             <Divider />
             {posts.map((post) => (
-                    <h1>
+                <h1 key={post}>
                     {post.id}
-                    </h1>
-            
-                
+                </h1>
             ))}
         </Grid>
     );
