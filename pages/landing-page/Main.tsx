@@ -2,8 +2,7 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import Markdown from './Markdown';
-import FeaturedPost from './FeaturedPost';
+
 
 interface MainProps {
     posts: ReadonlyArray<any>;
