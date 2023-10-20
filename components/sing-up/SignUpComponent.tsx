@@ -98,7 +98,11 @@ function SignUp() {
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="#" variant="body2">
+<<<<<<< HEAD
                 ¿Ya tienes una cuenta? Iniciar sesión
+=======
+                  Hola :3
+>>>>>>> develop-cristian
                 </Link>
               </Grid>
             </Grid>
