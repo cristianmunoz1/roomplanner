@@ -3,8 +3,7 @@ import SignUpComponent from '../components/sing-up/SignUpComponent';
 const signup = () => {
     return (
         <div>
-
-            <main className=''>
+            <main>
                 < SignUpComponent/>
             </main>
         </div>

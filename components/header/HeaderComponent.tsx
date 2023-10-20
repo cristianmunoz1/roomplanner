@@ -43,7 +43,10 @@ const Header = (props: HeaderProps) => {
                     <SearchIcon />
                 </IconButton>
                 <Button variant="outlined" size="small" onClick={handleBuscarClick}>
-                    Sign up
+                    Registrarse
+                </Button>
+                <Button variant="outlined" size="small" style={{marginLeft: "5px"}}>
+                    Iniciar sesión
                 </Button>
             </Toolbar>
             <Toolbar
