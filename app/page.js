@@ -1,5 +1,5 @@
 "use client"
-import Blog from '../pages/landing-page/landing-page'
+import Blog from '../pages/landing-page'
 
 import {ThemeProvider as NextThemesProvider} from "next-themes";
       

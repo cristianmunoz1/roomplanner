@@ -5,6 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import { useRouter } from 'next/navigation';
 
 interface HeaderProps {
     sections: ReadonlyArray<{
@@ -14,7 +15,14 @@ interface HeaderProps {
     title: string;
 }
 
-export default function Header(props: HeaderProps) {
+const Header = (props: HeaderProps) => {
+
+    const router = useRouter();
+
+    const handleBuscarClick = () => {
+        router.push('signup-page');
+    };
+    
     const { sections, title } = props;
 
     return (
@@ -34,7 +42,7 @@ export default function Header(props: HeaderProps) {
                 <IconButton>
                     <SearchIcon />
                 </IconButton>
-                <Button variant="outlined" size="small">
+                <Button variant="outlined" size="small" onClick={handleBuscarClick}>
                     Sign up
                 </Button>
             </Toolbar>
@@ -59,3 +67,5 @@ export default function Header(props: HeaderProps) {
         </React.Fragment>
     );
 }
+
+export default Header;
