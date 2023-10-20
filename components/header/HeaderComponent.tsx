@@ -19,10 +19,14 @@ const Header = (props: HeaderProps) => {
 
     const router = useRouter();
 
-    const handleBuscarClick = () => {
+    const handleRegistrarseClick = () => {
         router.push('signup-page');
     };
     
+    const handleIniciarsesionClick = () => {
+        router.push('signin-page');
+    };
+
     const { sections, title } = props;
 
     return (
@@ -42,10 +46,10 @@ const Header = (props: HeaderProps) => {
                 <IconButton>
                     <SearchIcon />
                 </IconButton>
-                <Button variant="outlined" size="small" onClick={handleBuscarClick}>
+                <Button variant="outlined" size="small" onClick={handleRegistrarseClick}>
                     Registrarse
                 </Button>
-                <Button variant="outlined" size="small" style={{marginLeft: "5px"}}>
+                <Button variant="outlined" size="small" style={{marginLeft: "5px"}} onClick={handleIniciarsesionClick}>
                     Iniciar sesión
                 </Button>
             </Toolbar>

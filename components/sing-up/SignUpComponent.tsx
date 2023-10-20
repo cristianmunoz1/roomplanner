@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import HotelIcon from '@mui/icons-material/Hotel';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -37,7 +37,7 @@ function SignUp() {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
+            <HotelIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Registrarse
@@ -98,11 +98,7 @@ function SignUp() {
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="#" variant="body2">
-<<<<<<< HEAD
                 ¿Ya tienes una cuenta? Iniciar sesión
-=======
-                  Hola :3
->>>>>>> develop-cristian
                 </Link>
               </Grid>
             </Grid>
