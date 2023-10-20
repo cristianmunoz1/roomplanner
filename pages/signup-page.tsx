@@ -5,7 +5,7 @@ const signup = () => {
         <div>
 
             <main className=''>
-                < SignUpComponent/>
+                < SignUpComponent />
             </main>
         </div>
 
