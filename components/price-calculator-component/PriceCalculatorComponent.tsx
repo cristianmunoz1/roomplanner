@@ -126,7 +126,7 @@ const PriceCalculatorComponent = () => {
                     </Select>
                 </Grid>
             </Grid>
-            <h1>{ }</h1>
+            <h1 className='text-3xl font-bold underline'>Hola :3</h1>
         </Paper >
     );
 };

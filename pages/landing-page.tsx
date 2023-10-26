@@ -12,7 +12,7 @@ import FeaturedPost from '../components/featured-post/FeaturedPostComponent';
 import Main from '../components/main/MainComponent';
 import Sidebar from '../components/sidebar/SidebarComponent';
 import Footer from '../components/footer/FooterComponent';
-import { posts } from '../const'
+import { posts } from '../const';
 import PriceCalculatorComponent from '../components/price-calculator-component/PriceCalculatorComponent';
 import { Box } from '@mui/material';
 
