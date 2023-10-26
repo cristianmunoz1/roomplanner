@@ -13,6 +13,8 @@ import Main from '../components/main/MainComponent';
 import Sidebar from '../components/sidebar/SidebarComponent';
 import Footer from '../components/footer/FooterComponent';
 import { posts } from '../const'
+import PriceCalculatorComponent from '../components/price-calculator-component/PriceCalculatorComponent';
+import { Box } from '@mui/material';
 
 
 const sections = [
@@ -104,8 +106,15 @@ export default function Blog() {
               social={sidebar.social}
             />
           </Grid>
+          <Box sx={{
+            position: 'relative',
+            mt: 10,
+          }}>
+            <PriceCalculatorComponent></PriceCalculatorComponent>
+          </Box>
+
         </main>
-      </Container>
+      </Container >
       <Footer
         title="Footer"
         description="Something here to give the footer a purpose!"
