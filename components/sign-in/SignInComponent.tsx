@@ -55,7 +55,7 @@ function SignInComponent() {
                             <HotelIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5">
-                            Iniciar Sesión
+                            Inicia Sesión en Roomplanner
                         </Typography>
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                             <TextField
@@ -93,7 +93,7 @@ function SignInComponent() {
                                     </Link>
                                 </Grid>
                                 <Grid item>
-                                    <Link href="#" variant="body2">
+                                    <Link href="/signup-page" variant="body2">
                                         {"¿No tienes una cuenta?. Créala"}
                                     </Link>
                                 </Grid>
