@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { differenceInCalendarDays } from 'date-fns';
+import dayjs from 'dayjs'
 
 
 
@@ -28,8 +28,14 @@ const PriceCalculatorComponent = () => {
     // Funciones handle
 
     //Función para detectar cambios en la fecha de ingreso
-    const handleFechaIngreso = (date: Date) => {
-        setFechaIngreso(date);
+    const handleFechaIngreso = (e) => {
+        setFechaIngreso(e.target.value);
+        calcularDiasEstadia();
+    }
+
+    const handleFechaSalida = (e) => {
+        setFechaSalida(e.target.value);
+        calcularDiasEstadia();
     }
 
     //Función para detectar cambios en el input de cantidad de personas
@@ -41,6 +47,14 @@ const PriceCalculatorComponent = () => {
     //Función para detectar cambios en el input de tipo de habitación
     const handleChangeTipoHabitacion = (event: SelectChangeEvent) => {
         setTipoDeHabitacion(event.target.value);
+    }
+
+    const calcularDiasEstadia = () => {
+        const date1 = dayjs(fechaIngreso);
+        const date2 = dayjs(fechaSalida);
+
+        const diferencia = date2.diff(date1, 'day');
+        setDiasSeleccionados(diferencia);
     }
 
 
@@ -63,7 +77,9 @@ const PriceCalculatorComponent = () => {
                             sx={{
                                 margin: 2,
                             }}
-                            label={'Fecha de ingreso'} />
+                            label={'Fecha de ingreso'}
+                            onChange={handleFechaIngreso}
+                        />
                     </LocalizationProvider>
                 </Grid>
                 <Grid item xs={6} sx={{
@@ -78,7 +94,7 @@ const PriceCalculatorComponent = () => {
                                 margin: 2,
                             }}
                             label={'Fecha de salida'}
-                            onChange={handleFechaIngreso}
+                            onChange={handleFechaSalida}
                         />
 
                     </LocalizationProvider>
