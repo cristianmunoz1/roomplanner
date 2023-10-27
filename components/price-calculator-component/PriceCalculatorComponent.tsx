@@ -106,13 +106,15 @@ const PriceCalculatorComponent = () => {
                     >
                         {Object.keys(preciosHabitaciones).map((tipoHabitacion, index) => (<MenuItem key='{index}' value={tipoHabitacion}>{tipoHabitacion}</MenuItem>))}
                     </Select>
+                    <Grid item xs={12}>
+                        <h1 className='my-7 text-lime-700 text-bold text-2xl'>Precio: {precioActual}</h1>
+                    </Grid>
                 </Grid>
                 <Grid item xs={12}>
                     <Button className='text-white bg-sky-600 hover:bg-sky-700' onClick={calculatePrice}>
                         Calcular Precio
                     </Button>
                 </Grid>
-                <h1>{precioActual}</h1>
             </Grid>
         </Paper >
     );
