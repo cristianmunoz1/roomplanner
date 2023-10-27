@@ -1,149 +1,96 @@
-import { Box, Grid, InputLabel, MenuItem, Paper, Select, SelectChangeEvent, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs from 'dayjs'
-
-
+import { Grid, Paper, Typography, TextField, Select, MenuItem, Button } from '@mui/material';
+import { differenceInCalendarDays, format } from 'date-fns';
 
 const PriceCalculatorComponent = () => {
+    const [fechaIngreso, setFechaIngreso] = useState(new Date());
+    const [fechaSalida, setFechaSalida] = useState(new Date());
+    const [tipoHabitacion, setTipoHabitacion] = useState('Estandar');
+    const [diasSeleccionados, setDiasSeleccionados] = useState(1);
 
-    //Constantes
-    const tipoDeHabitaciones = {
-        'Sencilla': 50000,
-        'Premium': 70000,
-        'Super Premium': 80000,
-        'Presidencial:': 90000
-    }
+    const handleInputFechaIngreso = (event) => {
+        const fechaIngreso = new Date(event.target.value);
+        setFechaIngreso(fechaIngreso);
+        updateDiasSeleccionados(fechaIngreso, fechaSalida);
+    };
 
+    const handleInputFechaSalida = (event) => {
+        const newEndDate = new Date(event.target.value);
+        setFechaSalida(newEndDate);
+        updateDiasSeleccionados(fechaIngreso, newEndDate);
+    };
 
-    //Hooks
-    const [fechaIngreso, setFechaIngreso] = useState(new Date);
-    const [fechaSalida, setFechaSalida] = useState(new Date);
-    const [diasSeleccionados, setDiasSeleccionados] = useState(0);
-    const [cantidadPersonas, setCantidadPersonas] = useState('');
-    const [tipoDeHabitacion, setTipoDeHabitacion] = useState('');
+    const updateDiasSeleccionados = (start, end) => {
+        const days = differenceInCalendarDays(end, start);
+        if (days < 0) {
+            setDiasSeleccionados(0);
+        } else {
+            setDiasSeleccionados(days);
+        }
 
-    // Funciones handle
+    };
 
-    //Función para detectar cambios en la fecha de ingreso
-    const handleFechaIngreso = (e) => {
-        setFechaIngreso(e.target.value);
-        calcularDiasEstadia();
-    }
+    const handletipoHabitacionChange = (event) => {
+        setTipoHabitacion(event.target.value);
+    };
 
-    const handleFechaSalida = (e) => {
-        setFechaSalida(e.target.value);
-        calcularDiasEstadia();
-    }
+    const calculatePrice = () => {
 
-    //Función para detectar cambios en el input de cantidad de personas
-    const handleChangeCantidadPersonas = (event: SelectChangeEvent) => {
-
-        setCantidadPersonas(event.target.value);
-    }
-
-    //Función para detectar cambios en el input de tipo de habitación
-    const handleChangeTipoHabitacion = (event: SelectChangeEvent) => {
-        setTipoDeHabitacion(event.target.value);
-    }
-
-    const calcularDiasEstadia = () => {
-        const date1 = dayjs(fechaIngreso);
-        const date2 = dayjs(fechaSalida);
-
-        const diferencia = date2.diff(date1, 'day');
-        setDiasSeleccionados(diferencia);
-    }
-
+    };
 
     return (
-        <Paper elevation={10} sx={{
-
-        }}>
+        <Paper elevation={3} style={{ padding: '16px' }}>
+            <Typography variant="h5" gutterBottom>
+                Calculadora de Precios de Reservas
+            </Typography>
             <Grid container spacing={2}>
-                <Grid item xs={12} textAlign={'center'}>
-                    <h2>¡Calcula el precio de tu próxima reserva!</h2>
-                </Grid>
-                <Grid item xs={6} sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                }}>
-
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker
-                            format="DD/MM/YYYY"
-                            sx={{
-                                margin: 2,
-                            }}
-                            label={'Fecha de ingreso'}
-                            onChange={handleFechaIngreso}
-                        />
-                    </LocalizationProvider>
-                </Grid>
-                <Grid item xs={6} sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                }}>
-
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker
-                            format="DD/MM/YYYY"
-                            sx={{
-                                margin: 2,
-                            }}
-                            label={'Fecha de salida'}
-                            onChange={handleFechaSalida}
-                        />
-
-                    </LocalizationProvider>
-                </Grid>
-
-                <Grid item xs={3}>
-                    <InputLabel id="label-cantidad-personas" sx={{ marginLeft: 2 }}>Cantidad de personas</InputLabel>
-                    <Select
-                        labelId='label-cantidad-personas'
-                        id='input-cantidad-personas'
-                        value={cantidadPersonas}
-                        label="Cantidad de personas"
-                        onChange={handleChangeCantidadPersonas}
-                        fullWidth
-                        sx={{
-                            margin: 2
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        label="Fecha Inicial"
+                        type="date"
+                        value={format(fechaIngreso, 'yyyy-MM-dd')}
+                        onChange={handleInputFechaIngreso}
+                        InputLabelProps={{
+                            shrink: true,
                         }}
-                    >
-                        <MenuItem value={1}> 1 </MenuItem>
-                        <MenuItem value={2}> 2 </MenuItem>
-                        <MenuItem value={3}> 3 </MenuItem>
-
-                    </Select>
-                    <h1>{cantidadPersonas}</h1>
+                    />
                 </Grid>
-                <Grid item xs={3}>
-                    <InputLabel id="label-tipo-habitacion" sx={{ marginLeft: 2 }}>Tipo de habitación</InputLabel>
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        label="Fecha Final"
+                        type="date"
+                        value={format(fechaSalida, 'yyyy-MM-dd')}
+                        onChange={handleInputFechaSalida}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+                </Grid>
+                <Grid item xs={12}>
                     <Select
-                        labelId='label-tipo-habitacion'
-                        id='input-tipo-habitacion'
-                        value={tipoDeHabitacion}
                         label="Tipo de Habitación"
-                        onChange={handleChangeTipoHabitacion}
-                        fullWidth
-                        sx={{
-                            margin: 2
-                        }}
+                        value={tipoHabitacion}
+                        onChange={handletipoHabitacionChange}
                     >
-                        {Object.keys(tipoDeHabitaciones).map((tipoHabitacion, index) => (
-                            <MenuItem key={index} value={tipoHabitacion}>
-                                {tipoHabitacion}
-                            </MenuItem>
-                        ))}
-
+                        <MenuItem value="standard">Estándar</MenuItem>
+                        <MenuItem value="deluxe">Deluxe</MenuItem>
+                        <MenuItem value="suite">Suite</MenuItem>
                     </Select>
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        label="Número de Días"
+                        value={diasSeleccionados}
+                        disabled
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <Button variant="contained" color="primary" onClick={calculatePrice}>
+                        Calcular Precio
+                    </Button>
                 </Grid>
             </Grid>
-            <h1 className='text-3xl font-bold underline'>Hola :3</h1>
-        </Paper >
+        </Paper>
     );
 };
 
