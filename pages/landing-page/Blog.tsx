@@ -87,7 +87,7 @@ export default function Blog() {
     <>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="Blog" sections={sections} />
+        <Header title="RoomPlanner" sections={sections} />
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
           <Grid container spacing={4}>
@@ -107,7 +107,7 @@ export default function Blog() {
         </main>
       </Container>
       <Footer
-        title="Footer"
+        title="Contactenos "
         description="Something here to give the footer a purpose!"
       />
     </>
