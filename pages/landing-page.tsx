@@ -82,7 +82,7 @@ export default function Blog() {
       </Container >
       <Footer
         title="Roomplanner"
-        description="Something here to give the footer a purpose!"
+        description="Hotel Cinco estrellas, Medellin, Antioquia "  
       />
     </>
   );

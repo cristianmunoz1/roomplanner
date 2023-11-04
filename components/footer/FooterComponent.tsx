@@ -7,7 +7,9 @@ import Link from '@mui/material/Link';
 function Copyright() {
     return (
         <Typography variant="body2" color="text.secondary" align="center">
-            {'Copyright © '}
+            {'Jhon Alexander Botero '}<br/>
+            {'Cristian Muñoz Botero '}<br/>
+            {'Jonathan Andrés Granda '}<br/>
             <Link color="inherit" href="https://mui.com/">
                 Your Website
             </Link>{' '}
