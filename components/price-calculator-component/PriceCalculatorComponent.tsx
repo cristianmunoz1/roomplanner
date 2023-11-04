@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Grid, Paper, Typography, TextField, Select, MenuItem, Button } from '@mui/material';
-import { differenceInCalendarDays, format } from 'date-fns';
+import { differenceInCalendarDays, format, addDays } from 'date-fns';
 
 const PriceCalculatorComponent = () => {
 
@@ -26,14 +26,14 @@ const PriceCalculatorComponent = () => {
 
     const handleInputFechaIngreso = (event) => {
         const fechaIngreso = new Date(event.target.value);
-        setFechaIngreso(fechaIngreso);
+        setFechaIngreso(addDays(fechaIngreso, 1));
         updateDiasSeleccionados(fechaIngreso, fechaSalida);
     };
 
     const handleInputFechaSalida = (event) => {
-        const newEndDate = new Date(event.target.value);
-        setFechaSalida(newEndDate);
-        updateDiasSeleccionados(fechaIngreso, newEndDate);
+        const fechaSalida = new Date(event.target.value);
+        setFechaSalida(addDays(fechaSalida, 1));
+        updateDiasSeleccionados(fechaIngreso, fechaSalida);
     };
 
     const updateDiasSeleccionados = (start, end) => {
@@ -41,7 +41,7 @@ const PriceCalculatorComponent = () => {
         if (days < 0) {
             setDiasSeleccionados(0);
         } else {
-            setDiasSeleccionados(days);
+            setDiasSeleccionados(days + 1);
         }
 
     };
