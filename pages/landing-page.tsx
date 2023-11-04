@@ -13,7 +13,7 @@ import PriceCalculatorComponent from '../components/price-calculator-component/P
 import { Box } from '@mui/material';
 
 
-const sections = [
+/* const sections = [
   { title: 'Technology', url: '#' },
   { title: 'Design', url: '#' },
   { title: 'Culture', url: '#' },
@@ -24,7 +24,7 @@ const sections = [
   { title: 'Health', url: '#' },
   { title: 'Style', url: '#' },
   { title: 'Travel', url: '#' },
-];
+]; */
 
 const mainFeaturedPost = {
   title: 'Title of a longer featured blog post',
@@ -59,7 +59,7 @@ export default function Blog() {
     <>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="ROOMPLANNER" sections={sections} />
+        <Header title="ROOMPLANNER" />
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
           <Grid container spacing={4}>
@@ -82,7 +82,7 @@ export default function Blog() {
       </Container >
       <Footer
         title="Roomplanner"
-        description="Hotel Cinco estrellas, Medellin, Antioquia "  
+        description="Hotel Cinco estrellas, Medellin, Antioquia "
       />
     </>
   );
