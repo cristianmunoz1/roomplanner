@@ -37,16 +37,37 @@ const mainFeaturedPost = {
 
 const featuredPosts = [
   {
-    id: 'Featured post',
-    label: 'Featured post',
+    id: 'Estandar',
+    label: 'Habitación individual',
     description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
+      'Es una habitación sencilla con capacidad para 1 persona, adecuada para viajeros en solitario o viajes de negocio'
+      +', dicha habitación cuenta con las comodidades esenciales para cualquier persona.',
+    ruta:
+      '../../signin-page',  
   },
   {
-    id: 'Featured post',
-    label: 'Featured post',
+    id: 'Premium',
+    label: 'Habitación Premium' ,
     description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
+      'Esta es una habitación de hotel, que cuenta con zona de dormitorio, zona de estar, y cocina americana, perfectas para huespedes que desean mas espacio y comodidades que las de una habitacion estandar. ',
+    ruta:
+      '../../signup-page',
+  },
+  {
+    id: 'Super Premium',
+    label: 'Suite Clase A',
+    description:
+      'Es una habitación mas grande que la Habitación Premium, ofreciendo mas espacio y lujos para el huesped, esta categoria cuenta con servicios personalizados, para brindar mas exclusividad al cliente.',
+    ruta:
+      '',
+  },
+  {
+    id: 'Suite presidencial',
+    label: 'Suite Deluxe',
+    description:
+      'Esta es la habitación mas exclusiva que ofrece el hotel, brindando lujos en su maximo esplendor, servicios privados, independientes a las demas habitaciones del hotel, y atencion personalizada en todo momento .',
+    ruta:
+      '',
   },
 ];
 
@@ -61,16 +82,18 @@ export default function Blog() {
       <Container maxWidth="lg">
         <Header title="ROOMPLANNER" />
         <main>
+          
           <MainFeaturedPost post={mainFeaturedPost} />
           <Grid container spacing={4}>
             {featuredPosts.map((post) => (
               <FeaturedPost key={post.id} post={post} />
             ))}
           </Grid>
-          <Grid container spacing={5} sx={{ mt: 3 }}>
+          {/*<Grid container spacing={5} sx={{ mt: 3 }}>
             <Main title="From the firehose" posts={posts} />
 
-          </Grid>
+          </Grid>*/} 
+       
           <Box sx={{
             position: 'relative',
             mt: 10,
