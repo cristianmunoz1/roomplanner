@@ -1,10 +1,10 @@
 import * as React from 'react';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import SearchIcon from '@mui/icons-material/Search';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import { useRouter } from 'next/navigation';
+import LocalHotelIcon from '@mui/icons-material/LocalHotel';
 
 interface HeaderProps {
     sections: ReadonlyArray<{
@@ -14,13 +14,25 @@ interface HeaderProps {
     title: string;
 }
 
-export default function Header(props: HeaderProps) {
+const Header = (props: HeaderProps) => {
+
+    const router = useRouter();
+
+    const handleRegistrarseClick = () => {
+        router.push('signup-page');
+    };
+
+    const handleIniciarsesionClick = () => {
+        router.push('signin-page');
+    };
+
     const { sections, title } = props;
 
     return (
         <React.Fragment>
             <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                
+                <LocalHotelIcon
+                    className=' text-4xl  text-teal-400 border-solid border-black border-2 bg-teal-950 p-0 '></LocalHotelIcon>
                 <Typography
                     component="h2"
                     variant="h5"
@@ -31,11 +43,11 @@ export default function Header(props: HeaderProps) {
                 >
                     {title}
                 </Typography>
-                <Button variant="outlined" size="small">
-                    Sign In
+                <Button variant="outlined" size="small" onClick={handleRegistrarseClick}>
+                    Registrarse
                 </Button>
-                <Button variant="outlined" size="small">
-                    Sign up
+                <Button variant="outlined" size="small" style={{ marginLeft: "5px" }} onClick={handleIniciarsesionClick}>
+                    Iniciar sesión
                 </Button>
             </Toolbar>
             <Toolbar
@@ -59,3 +71,5 @@ export default function Header(props: HeaderProps) {
         </React.Fragment>
     );
 }
+
+export default Header;
