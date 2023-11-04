@@ -97,8 +97,8 @@ function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
-                ¿Ya tienes una cuenta? Iniciar sesión
+                <Link href="/signin-page" variant="body2">
+                  ¿Ya tienes una cuenta? Iniciar sesión
                 </Link>
               </Grid>
             </Grid>
