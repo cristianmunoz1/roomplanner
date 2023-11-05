@@ -29,7 +29,7 @@ import { Box } from '@mui/material';
 const mainFeaturedPost = {
   title: 'Abre la puerta a un mundo nuevo.',
   description:
-    "Todos queremos estar como en casa, Así que cuidar de su alegría y hacer que las vacaciones sean increíbles es lo quue buscamos en Hotel RP",
+    "Todos queremos estar como en casa, así que cuidar de su alegría y hacer que las vacaciones sean increíbles es lo que buscamos en Hotel RP",
   image: 'https://source.unsplash.com/random?wallpapers',
   imageText: 'main image description',
   linkText: 'Descubre mas...',
