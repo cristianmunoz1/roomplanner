@@ -27,12 +27,12 @@ import { Box } from '@mui/material';
 ]; */
 
 const mainFeaturedPost = {
-  title: 'Title of a longer featured blog post',
+  title: 'Abre la puerta a un mundo nuevo.',
   description:
-    "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
+    "Todos queremos estar como en casa, Así que cuidar de su alegría y hacer que las vacaciones sean increíbles es lo quue buscamos en Hotel RP",
   image: 'https://source.unsplash.com/random?wallpapers',
   imageText: 'main image description',
-  linkText: 'Continue reading…',
+  linkText: 'Descubre mas...',
 };
 
 const featuredPosts = [
@@ -80,7 +80,7 @@ export default function Blog() {
     <>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="ROOMPLANNER" />
+        <Header title="ROOMPLANNER" sections={[]} />
         <main>
 
           <MainFeaturedPost post={mainFeaturedPost} />
