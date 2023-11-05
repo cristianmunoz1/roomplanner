@@ -6,10 +6,6 @@ import { useRouter } from 'next/navigation';
 import LocalHotelIcon from '@mui/icons-material/LocalHotel';
 
 interface HeaderProps {
-    sections: ReadonlyArray<{
-        title: string;
-        url: string;
-    }>;
     title: string;
 }
 

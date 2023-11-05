@@ -80,7 +80,7 @@ export default function Blog() {
     <>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="ROOMPLANNER" sections={[]} />
+        <Header title="ROOMPLANNER" />
         <main>
 
           <MainFeaturedPost post={mainFeaturedPost} />
