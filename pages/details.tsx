@@ -2,7 +2,6 @@
 import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import 'tailwindcss/tailwind.css';
-import Box from '@mui/material/Box';
 import Header from '../components/header/HeaderComponent';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
