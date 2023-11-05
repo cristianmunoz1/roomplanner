@@ -81,9 +81,7 @@ body {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  background: rgba(241, 241, 241, 0.486);
 }
 
 a {
@@ -91,8 +89,8 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: light) {
   html {
     color-scheme: light;
   }
-}
+} */
