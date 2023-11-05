@@ -7,6 +7,7 @@ import Header from '../components/header/HeaderComponent';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
+import Footer from '../components/footer/FooterComponent';
 
 function Copyright() {
     return (
@@ -38,25 +39,10 @@ export default function StickyFooter() {
                 </Typography>
                 <Typography variant="body1">Sticky footer placeholder.</Typography>
             </Container>
-            <Box
-                component="footer"
-                sx={{
-                    py: 3,
-                    px: 2,
-                    mt: 'auto',
-                    backgroundColor: (theme) =>
-                        theme.palette.mode === 'light'
-                            ? theme.palette.grey[200]
-                            : theme.palette.grey[800],
-                }}
-            >
-                <Container maxWidth="sm">
-                    <Typography variant="body1">
-                        My sticky footer can be found here.
-                    </Typography>
-                    <Copyright />
-                </Container>
-            </Box>
+            <Footer
+                title="Roomplanner"
+                description="Hotel Cinco estrellas, Medellin, Antioquia "
+            />
         </Container>
     );
 }

@@ -103,10 +103,7 @@ export default function Blog() {
 
         </main>
       </Container >
-      <Footer
-        title="Roomplanner"
-        description="Hotel Cinco estrellas, Medellin, Antioquia "
-      />
+     
     </>
   );
 }
