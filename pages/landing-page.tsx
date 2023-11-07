@@ -6,9 +6,7 @@ import Container from '@mui/material/Container';
 import Header from '../components/header/HeaderComponent';
 import MainFeaturedPost from '../components/main-featured-post/MainFeaturedPostComponent';
 import FeaturedPost from '../components/featured-post/FeaturedPostComponent';
-import Main from '../components/main/MainComponent';
 import Footer from '../components/footer/FooterComponent';
-import { posts } from '../const';
 import PriceCalculatorComponent from '../components/price-calculator-component/PriceCalculatorComponent';
 import { Box } from '@mui/material';
 

@@ -4,6 +4,7 @@ import { Container } from '@mui/material';
 import BookingComponent from "../components/booking/BookingComponent";
 
 
+
 export default function bookingPage() {
 
     return (
