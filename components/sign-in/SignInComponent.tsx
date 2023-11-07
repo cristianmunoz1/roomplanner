@@ -87,11 +87,11 @@ function SignInComponent() {
                                 Iniciar Sesión
                             </Button>
                             <Grid container>
-                                <Grid item xs>
+                                {/* <Grid item xs>
                                     <Link href="#" variant="body2">
                                         ¿Olvidaste tu contraseña?
                                     </Link>
-                                </Grid>
+                                </Grid> */}
                                 <Grid item>
                                     <Link href="/signup-page" variant="body2">
                                         {"¿No tienes una cuenta?. Créala"}
