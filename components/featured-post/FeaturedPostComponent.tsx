@@ -17,8 +17,8 @@ interface FeaturedPostProps {
     };
 }
 
-export default function FeaturedPost(props: FeaturedPostProps ) {
-    const {post}=props
+export default function FeaturedPost(props: FeaturedPostProps) {
+    const { post } = props
     return (
         <Grid item xs={12} md={6}>
             <CardActionArea component="a" href={post.ruta}>
