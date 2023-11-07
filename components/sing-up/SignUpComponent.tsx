@@ -15,7 +15,6 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-// TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 
@@ -77,23 +76,23 @@ function SignUp() {
                 />
               </Grid>
               <Grid item xs={12}>
-              <Box sx={{ minWidth: 120 }}>
-                <FormControl fullWidth>
-                  <InputLabel id="type-id">Tipo documento</InputLabel>
-                  <Select
-                    labelId="type-id"
-                    id="type-id"
-                    value={type}
-                    label="Tipo de Identificación"
-                    onChange={handleChange}
-                  >
-                    <MenuItem value={1}>Cedula de ciudadania</MenuItem>
-                    <MenuItem value={2}>Cedula de extranjeria</MenuItem>
-                    <MenuItem value={3}>Pasaporte</MenuItem>
+                <Box sx={{ minWidth: 120 }}>
+                  <FormControl fullWidth>
+                    <InputLabel id="type-id">Tipo documento</InputLabel>
+                    <Select
+                      labelId="type-id"
+                      id="type-id"
+                      value={type}
+                      label="Tipo de Identificación"
+                      onChange={handleChange}
+                    >
+                      <MenuItem value={1}>Cedula de ciudadania</MenuItem>
+                      <MenuItem value={2}>Cedula de extranjeria</MenuItem>
+                      <MenuItem value={3}>Pasaporte</MenuItem>
 
-                  </Select>
-                </FormControl>
-              </Box>
+                    </Select>
+                  </FormControl>
+                </Box>
               </Grid>
               <Grid item xs={12}>
                 <TextField
