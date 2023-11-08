@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Grid, Paper, Typography, TextField, Select, MenuItem, Button, Container } from '@mui/material';
 import { differenceInCalendarDays, format, addDays } from 'date-fns';
+import Axios from 'axios';
 
 export default function BookingComponent() {
 
@@ -23,6 +24,24 @@ export default function BookingComponent() {
         currency: 'COP',
         minimumFractionDigits: 0,
     });
+
+    const handleReserva = async () => {
+        try {
+            const response = await Axios.post('api', {
+                fechaIngreso,
+                fechaSalida,
+                tipoHabitacion,
+            });
+
+            if (response.status === 200) {
+                console.log('Reserva exitosa');
+            } else {
+                console.log('Error al realizar la reserva')
+            }
+        } catch (error) {
+            console.log("Este es el error ", error);
+        }
+    }
 
     const handleInputFechaIngreso = (event) => {
         const fechaIngreso = new Date(event.target.value);
@@ -117,7 +136,7 @@ export default function BookingComponent() {
                         </Button>
                     </Grid>
                     <Grid item xs={5}>
-                        <Button className='text-white bg-sky-600 hover:bg-sky-700 w-max' onClick={calculatePrice}>
+                        <Button className='text-white bg-sky-600 hover:bg-sky-700 w-max' onClick={handleReserva}>
                             Realizar reserva
                         </Button>
                     </Grid>
