@@ -8,7 +8,11 @@ import MainFeaturedPost from '../components/main-featured-post/MainFeaturedPostC
 import FeaturedPost from '../components/featured-post/FeaturedPostComponent';
 import Footer from '../components/footer/FooterComponent';
 import PriceCalculatorComponent from '../components/price-calculator-component/PriceCalculatorComponent';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import contenidoTarjetas from '../const/cardsContent';
+import LandingCardComponent from '../components/landing-cards/LandingCardComponent';
+import { TRUE } from 'sass';
+import { Griffy } from 'next/font/google';
 
 
 /* const sections = [
@@ -76,15 +80,25 @@ const featuredPosts = [
 export default function Blog() {
   return (
     <>
+      <Header title="ROOMPLANNER" />
       <CssBaseline />
-      <Container maxWidth="lg">
-        <Header title="ROOMPLANNER" />
+      <Container className='h-full' >
+
         <main>
 
           <MainFeaturedPost post={mainFeaturedPost} />
-          <Grid container spacing={4}>
+
+          <Grid container className='flex flex-col items-center pb-8 underline '>
+            <Typography variant='h4'>¡Descubre todos los tipos de habitación que tenemos para tí!</Typography>
+          </Grid>
+          <Grid container spacing={4} className=''>
             {featuredPosts.map((post) => (
               <FeaturedPost key={post.id} post={post} />
+            ))}
+          </Grid>
+          <Grid container spacing={0} className='pt-20'>
+            {contenidoTarjetas.map((card) => (
+              <LandingCardComponent key={card.id} title={card.title} description={card.description} image={card.image} direction={card.direction} />
             ))}
           </Grid>
           {/*<Grid container spacing={5} sx={{ mt: 3 }}>

@@ -26,7 +26,7 @@ const Header = (props: HeaderProps) => {
 
     return (
         <React.Fragment>
-            <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <Toolbar sx={{ borderBottom: 1, borderColor: 'divider', marginBottom: 0 }}>
                 <Link href='/'>
                     <Image src={'/images/logo.jpg'} alt='Logo' width={70} height={70}>
                     </Image>
