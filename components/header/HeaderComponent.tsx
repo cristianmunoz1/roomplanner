@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import 'tailwindcss/tailwind.css';
 import Link from '@mui/material/Link';
 interface HeaderProps {
     title: string;
@@ -27,11 +28,11 @@ const Header = (props: HeaderProps) => {
         <React.Fragment>
             <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Link href='/'>
-                    <Image src={'/images/logo.jpg'} alt='Logo' width={70} height={100}>
+                    <Image src={'/images/logo.jpg'} alt='Logo' width={70} height={70}>
                     </Image>
                 </Link>
                 <Typography
-                    className='text-4xl font-bold font-sans ml-8'
+                    className='text-4xl font-bold font-sans ml-40'
                     component="h2"
                     variant="h5"
                     color="inherit"

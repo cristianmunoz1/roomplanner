@@ -28,7 +28,7 @@ const mainFeaturedPost = {
   title: 'Abre la puerta a un mundo nuevo.',
   description:
     "Todos queremos estar como en casa, así que cuidar de su alegría y hacer que las vacaciones sean increíbles es lo que buscamos en Hotel RP",
-  image: 'https://source.unsplash.com/random?wallpapers',
+  image: '/images/main.jpg',
   imageText: 'main image description',
   linkText: 'Descubre mas...',
 };

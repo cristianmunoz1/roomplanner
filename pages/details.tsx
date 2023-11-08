@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import Footer from '../components/footer/FooterComponent';
-import CarouselComponent from '../components/carousel/CarouselComponent';
 
 function Copyright() {
     return (
@@ -26,15 +25,7 @@ function Copyright() {
 export default function StickyFooter() {
     return (
         <Container maxWidth='lg'>
-            <CarouselComponent
-                image1='/images/roomSencilla/roomSencilla.jpg'
-                image2='/images/roomSencilla/roomSencilla1.jpg'
-                image3='/images/roomSencilla/roomSencilla2.jpg'
-                image4='/images/roomSencilla/roomSencilla3.jpg'
-                image5='/images/roomSencilla/roomSencilla4.jpg'
-            >
 
-            </CarouselComponent>
             <CssBaseline />
             <Header title="ROOMPLANNER" />
             <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
@@ -52,6 +43,6 @@ export default function StickyFooter() {
                 title="Roomplanner"
                 description="Hotel Cinco estrellas, Medellin, Antioquia "
             />
-        </Container>
+        </Container >
     );
 }
