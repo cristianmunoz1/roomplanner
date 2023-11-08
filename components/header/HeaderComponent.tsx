@@ -32,7 +32,7 @@ const Header = (props: HeaderProps) => {
                     </Image>
                 </Link>
                 <Typography
-                    className='text-4xl font-bold font-sans ml-40'
+                    className='text-4xl font-bold font-mono ml-40'
                     component="h2"
                     variant="h5"
                     color="inherit"

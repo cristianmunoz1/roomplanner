@@ -17,14 +17,14 @@ export default function LandingCardComponent(props: landingCardProps) {
     if (direction === false) {
         return (
             <Container>
-                <Grid container spacing={5} xs={12} className='flex flex-row items-center content-center pb-12'>
+                <Grid container spacing={5} xs={12} className='flex flex-row items-center content-center pb-12 mb-10'>
                     <Grid item xs={12} sm={4}>
                         <Image src={image} alt='Tarjeta con foto a izquierda' width={400} height={500} />
                     </Grid>
                     <Grid item xs={12} sm={8} className='flex content-center items-center flex-col'>
-                        <Typography variant='h4' className='pb-5' >{title}</Typography>
+                        <Typography variant='h4' className='pb-5 font-serif' >{title}</Typography>
                         <Divider />
-                        <Typography variant='body1'>{description}</Typography>
+                        <Typography variant='body1' className='font-serif'>{description}</Typography>
                     </Grid>
                 </Grid >
             </Container >
@@ -32,11 +32,11 @@ export default function LandingCardComponent(props: landingCardProps) {
     } else {
         return (
             <Container>
-                <Grid container spacing={5} xs={12} className='flex flex-row items-center content-center pb-9'>
+                <Grid container spacing={5} xs={12} className='flex flex-row items-center content-center pb-9 mb-10'>
                     <Grid item xs={12} sm={8} className='flex content-center items-center flex-col'>
-                        <Typography variant='h4' className='pb-5'>{title}</Typography>
+                        <Typography variant='h4' className='pb-5 font-serif'>{title}</Typography>
                         <Divider />
-                        <Typography variant='body1'>{description}</Typography>
+                        <Typography variant='body1' className='font-serif'>{description}</Typography>
                     </Grid>
                     <Grid item xs={12} sm={4}>
                         <Image src={image} alt='Tarjeta con foto a derecha' width={400} height={500}></Image>

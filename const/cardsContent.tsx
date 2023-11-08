@@ -12,7 +12,22 @@ const contenidoTarjetas = [
         "description": "En nuestras instalaciones contamos con múltiples actividades que se realizan día a día. Aquí podrás encontrar piscina, juegos de mesa, biblioteca, zona de coworking, restaurante y zona común a los cuales podrás acceder durante todo el tiempo de tu reserva.",
         "image": "/images/people/izquierda.jpg",
         "direction": true
-    }
+    },
+    {
+        "id": 3,
+        "title": "TE SENTIRÁS COMO EN TU HOGAR",
+        "description": "Todas nuestras habitaciones te ofrecen la mayor comodidad y tranquilidad posible. Todas cuentan con insonorización para que no haya inconvenientes entre huéspedes y puedas sentirte realmente como en casa.",
+        "image": "/images/people/vistas.jpg",
+        "direction": false,
+    },
+    {
+        "id": 4,
+        "title": "DESCUBRE NUESTRAS COMIDAS",
+        "description": "En nuestro restaurante exclusivo para huéspedes podrás encontrar todos los tipos de comidas para cualquier hora del día, con múltiples variedades para elegir la que más te guste. Es un sitio tranquilo al que puedes asistir con tu familia las 24 horas del día. ",
+        "image": "/images/people/comida.jpg",
+        "direction": true,
+    },
+
 ]
 
 export default contenidoTarjetas;

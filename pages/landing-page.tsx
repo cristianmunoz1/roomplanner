@@ -89,7 +89,7 @@ export default function Blog() {
           <MainFeaturedPost post={mainFeaturedPost} />
 
           <Grid container className='flex flex-col items-center pb-8 underline '>
-            <Typography variant='h4'>¡Descubre todos los tipos de habitación que tenemos para tí!</Typography>
+            <Typography variant='h4' className='font-serif'>¡Descubre todos los tipos de habitación que tenemos para tí!</Typography>
           </Grid>
           <Grid container spacing={4} className=''>
             {featuredPosts.map((post) => (
