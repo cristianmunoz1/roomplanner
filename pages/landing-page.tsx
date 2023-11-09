@@ -15,6 +15,7 @@ import { TRUE } from 'sass';
 import { Griffy } from 'next/font/google';
 
 
+
 /* const sections = [
   { title: 'Technology', url: '#' },
   { title: 'Design', url: '#' },
@@ -53,7 +54,7 @@ const featuredPosts = [
     description:
       'Esta es una habitación de hotel, que cuenta con zona de dormitorio, zona de estar, y cocina americana, perfectas para huespedes que desean mas espacio y comodidades que las de una habitacion estandar. ',
     ruta:
-      '../../signup-page',
+      '../../room-premium-page',
   },
   {
     id: 'Super Premium',
@@ -61,7 +62,7 @@ const featuredPosts = [
     description:
       'Es una habitación mas grande que la Habitación Premium, ofreciendo mas espacio y lujos para el huesped, esta categoria cuenta con servicios personalizados, para brindar mas exclusividad al cliente.',
     ruta:
-      '',
+      '../../room-super-premium-page',
   },
   {
     id: 'Suite presidencial',
@@ -69,7 +70,7 @@ const featuredPosts = [
     description:
       'Esta es la habitación mas exclusiva que ofrece el hotel, brindando lujos en su maximo esplendor, servicios privados, independientes a las demas habitaciones del hotel, y atencion personalizada en todo momento .',
     ruta:
-      '',
+      '../../room-presidencial-page',
   },
 ];
 
@@ -115,6 +116,7 @@ export default function Blog() {
 
         </main>
       </Container >
+      
       <Footer
         title="Roomplanner"
         description="Hotel Cinco estrellas, Medellin, Antioquia "
