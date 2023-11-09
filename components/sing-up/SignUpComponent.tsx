@@ -14,17 +14,145 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Axios from 'axios';
+import { useEffect, useState } from 'react';
+
+
 
 const defaultTheme = createTheme();
 
+const handleSignUp = async () => {
+  try {
+    const response = await Axios.post('endpoint', {
 
+    })
+  } catch (error) {
+
+  }
+}
 
 function SignUp() {
-  const [type, setType] = React.useState('');
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setType(event.target.value as string);
-  };
+  /*Hooks para guardar todos los campos del formulario*/
+  const [nombres, setNombres] = useState('');
+  const [apellidos, setApellidos] = useState('');
+  const [tipoDocumento, setTipoDocumento] = useState(1);
+  const [numeroDocumento, setNumeroDocumento] = useState('');
+  const [correo, setCorreo] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [contrasena, setContrasena] = useState('');
+  const [contrasena1, setContrasena1] = useState('');
+
+  /* Hooks para guardar errores en los campos */
+  const [errorNombres, setErrorNombres] = useState(false);
+  const [errorApellidos, setErrorApellidos] = useState(false);
+  const [errorNumeroDocumento, setErrorNumeroDocumento] = useState(false);
+  const [errorCorreo, setErrorCorreo] = useState(false);
+  const [errorTelefono, setErrorTelefono] = useState(false);
+  const [errorContrasena, setErrorContrasena] = useState(false);
+  const [errorContrasena1, setErrorContrasena1] = useState(false);
+
+  /* Funciones para validar que los campos sean correctos */
+  const validarNombres = (nombres: string) => {
+    const expRegNombres = /^[A-Za-zÑñÁáÉéÍíÓóÚú\s]{3,}$/u;
+    const validacionNombres = expRegNombres.test(nombres);
+    if (nombres.length === 0 || validacionNombres) {
+      setErrorNombres(false);
+    } else {
+      setErrorNombres(true);
+    }
+  }
+
+  const validarApellidos = (apellidos: string) => {
+    const expRegApellidos = /^[A-Za-zÑñÁáÉéÍíÓóÚú\s]{3,}$/u;
+    const validacionApellidos = expRegApellidos.test(apellidos);
+    if (apellidos.length === 0 || validacionApellidos) {
+      setErrorApellidos(false);
+    } else {
+      setErrorApellidos(true);
+    }
+  }
+
+  const validarNumeroIdentificacion = (numero: string) => {
+    const expRegCedulaCiudadania = /^\d{5,10}$/;
+    const expRegCedulaExtranjeria = /^(\d{1,6}|)$/;
+    const expRegPasaporte = /^([A-Z\d]+|)$/;
+
+    if (tipoDocumento === 1) {
+      setErrorNumeroDocumento(expRegCedulaCiudadania.test(numero));
+    } else if (tipoDocumento === 2) {
+      setErrorNumeroDocumento(expRegCedulaExtranjeria.test(numero));
+    } else if (tipoDocumento === 3) {
+      setErrorNumeroDocumento(expRegPasaporte.test(numero));
+    }
+  }
+
+  const validarCorreo = (correo: string) => {
+    const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    setErrorCorreo(emailPattern.test(correo));
+  }
+
+  const validarTelefono = (telefono: string) => {
+    const expRegTelefono = /^3\d{9}$/;
+    setErrorTelefono(expRegTelefono.test(telefono));
+  }
+
+  const validarContrasena = (contrasena: string) => {
+    const expRegContrasena = /^(?=.*[A-ZÑ])(?=.*[a-z])(?=.*\d)(?=.*[.,;])[A-Za-zÑñ\d.,;]{10,20}$/;
+    setErrorContrasena(expRegContrasena.test(contrasena));
+  }
+
+  const validarContrasena1 = (contrasena1: string) => {
+    if (contrasena === contrasena1) {
+      setErrorContrasena1(false);
+    } else {
+      setErrorContrasena1(true);
+    }
+  }
+
+
+  /* Funciones para manejar los cambios de los campos */
+  const handleChangeName = (event) => {
+    setNombres(event.target.value);
+  }
+
+  const handleChangeApellidos = (event) => {
+    setApellidos(event.target.value);
+  }
+
+  const handleChangeTipo = (event) => {
+    setTipoDocumento(event.target.value);
+  }
+
+  const handleChangeNumeroIdentificacion = (event) => {
+    setNumeroDocumento(event.target.value);
+  }
+
+  const handleChangeCorreo = (event) => {
+    setCorreo(event.target.value);
+  }
+
+
+  const handleChangeContrasena = (event) => {
+    setContrasena(event.target.value);
+  }
+
+  const handleChangeContrasena1 = (event) => {
+    setContrasena1(event.target.value);
+  }
+
+  /* Funciones para manejar los cambios de estado y asignar errores a los campos */
+  /*   useEffect(() => {
+      
+      , [apellidos]
+    }); */
+
+
+  useEffect(() => {
+    validarNombres(nombres),
+      [nombres]
+  });
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -35,6 +163,7 @@ function SignUp() {
   };
 
   return (
+
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -56,13 +185,14 @@ function SignUp() {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete="given-name"
-                  name="firstName"
+                  name="name"
                   required
                   fullWidth
-                  id="firstName"
+                  id="name"
                   label="Nombres"
                   autoFocus
+                  error={errorNombres}
+                  onChange={handleChangeName}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -72,6 +202,7 @@ function SignUp() {
                   id="lastName"
                   label="Apellidos"
                   name="lastName"
+                  error={errorApellidos}
                   autoComplete="family-name"
                 />
               </Grid>
@@ -82,7 +213,7 @@ function SignUp() {
                     <Select
                       labelId="type-id"
                       id="type-id"
-                      value={type}
+                      value={tipoDocumento.toString}
                       label="Tipo de Identificación"
                       onChange={handleChange}
                     >
@@ -147,10 +278,11 @@ function SignUp() {
               </Grid>
             </Grid>
             <Button
-              type="submit"
+              className='bg-blue-500 hover:shadow-lg hover:shadow-blue-300'
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={handleChangeName}
             >
               Registrarse
             </Button>
