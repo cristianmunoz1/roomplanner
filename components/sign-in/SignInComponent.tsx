@@ -10,6 +10,8 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Header from '../header/HeaderComponent';
+import 'tailwindcss/tailwind.css';
 
 const defaultTheme = createTheme();
 
@@ -24,8 +26,11 @@ function SignInComponent() {
     };
 
     return (
+
         <ThemeProvider theme={defaultTheme}>
+            <Header title='ROOMPLANNER' />
             <Grid container component="main" sx={{ height: '100vh' }}>
+
                 <CssBaseline />
                 <Grid
                     item
@@ -39,7 +44,9 @@ function SignInComponent() {
                             t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
+
                     }}
+                    className='mt-0'
                 />
                 <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
                     <Box
@@ -81,8 +88,9 @@ function SignInComponent() {
                             <Button
                                 type="submit"
                                 fullWidth
-                                variant="contained"
+
                                 sx={{ mt: 3, mb: 2 }}
+                                className='btn bg-blue-600 hover:bg-blue-700 text-white hover:shadow-md hover:shadow-blue-700'
                             >
                                 Iniciar Sesión
                             </Button>
@@ -103,6 +111,8 @@ function SignInComponent() {
                 </Grid>
             </Grid>
         </ThemeProvider>
+
     );
+
 }
 export default SignInComponent;
