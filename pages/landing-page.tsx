@@ -45,7 +45,7 @@ const featuredPosts = [
       'Es una habitación sencilla con capacidad para 1 persona, adecuada para viajeros en solitario o viajes de negocio'
       + ', dicha habitación cuenta con las comodidades esenciales para cualquier persona.',
     ruta:
-      '../../signin-page',
+      '../../room-sencilla-page',
   },
   {
     id: 'Premium',
