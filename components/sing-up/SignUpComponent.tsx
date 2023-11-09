@@ -21,16 +21,6 @@ import { useEffect, useState } from 'react';
 
 const defaultTheme = createTheme();
 
-const handleSignUp = async () => {
-  try {
-    const response = await Axios.post('endpoint', {
-
-    })
-  } catch (error) {
-
-  }
-}
-
 function SignUp() {
 
   /*Hooks para guardar todos los campos del formulario*/
@@ -42,6 +32,7 @@ function SignUp() {
   const [telefono, setTelefono] = useState('');
   const [contrasena, setContrasena] = useState('');
   const [contrasena1, setContrasena1] = useState('');
+  const [enviados, setEnviados] = useState('');
 
   /* Hooks para guardar errores en los campos */
   const [errorNombres, setErrorNombres] = useState(false);
@@ -51,7 +42,7 @@ function SignUp() {
   const [errorTelefono, setErrorTelefono] = useState(false);
   const [errorContrasena, setErrorContrasena] = useState(false);
   const [errorContrasena1, setErrorContrasena1] = useState(false);
-  const [vacios, setVacios] = useState(false);
+  const [errores, setErrores] = useState(true);
   /* Funciones para validar que los campos sean correctos */
   const validarVacio = (cadena: string): boolean => {
     if (cadena.length === 0) {
@@ -84,16 +75,21 @@ function SignUp() {
 
   const validarNumeroIdentificacion = (numero: string) => {
     const expRegCedulaCiudadania = /^\d{5,10}$/;
-    const expRegCedulaExtranjeria = /^(\d{1,6}|)$/;
+    const expRegCedulaExtranjeria = /^E(\d{1,6}|)$/;
     const expRegPasaporte = /^([A-Z\d]+|)$/;
 
-    if (tipoDocumento === 1) {
-      setErrorNumeroDocumento(expRegCedulaCiudadania.test(numero));
-    } else if (tipoDocumento === 2) {
-      setErrorNumeroDocumento(expRegCedulaExtranjeria.test(numero));
-    } else if (tipoDocumento === 3) {
-      setErrorNumeroDocumento(expRegPasaporte.test(numero));
+    if (validarVacio(numero)) {
+      setErrorNumeroDocumento(false);
+    } else {
+      if (tipoDocumento === 1) {
+        setErrorNumeroDocumento(!expRegCedulaCiudadania.test(numero));
+      } else if (tipoDocumento === 2) {
+        setErrorNumeroDocumento(!expRegCedulaExtranjeria.test(numero));
+      } else if (tipoDocumento === 3) {
+        setErrorNumeroDocumento(!expRegPasaporte.test(numero));
+      }
     }
+
   }
 
   const validarCorreo = (correo: string) => {
@@ -126,6 +122,13 @@ function SignUp() {
     }
   }
 
+  const validarErrores = () => {
+    if (validarVacio(nombres) || validarVacio(apellidos) || validarVacio(numeroDocumento) || validarVacio(correo) || validarVacio(telefono) || validarVacio(contrasena) || validarVacio(contrasena1) || (errorNombres) || (errorApellidos) || (errorNumeroDocumento) || (errorCorreo) || (errorTelefono) || (errorContrasena) || (errorContrasena1)) {
+      setErrores(true);
+    } else {
+      setErrores(false);
+    }
+  }
 
   /* Funciones para manejar los cambios de los campos */
   const handleChangeName = (event) => {
@@ -163,13 +166,14 @@ function SignUp() {
   /* Función para enviar los datos al back */
   const handleSubmit = async () => {
 
-    if (validarVacio(nombres) || validarVacio(apellidos) || validarVacio(numeroDocumento) || validarVacio(correo) || validarVacio(telefono) || validarVacio(contrasena) || validarVacio(contrasena1)) {
-      setVacios(true);
+    if (errores == true) {
+      console.log("Hay campos vacíos o tiene errores en el formulario, verifique")
     } else {
-      setVacios(false);
-
       try {
-        const response = await Axios.post('api', {
+        const response = {
+          status: 200,
+        }
+        /* const response = await Axios.post('api', {
           nombres,
           apellidos,
           tipoDocumento,
@@ -177,14 +181,14 @@ function SignUp() {
           correo,
           telefono,
           contrasena,
-        });
+        }); */
         if (response.status === 200) {
-          console.log('Reserva exitosa');
+          console.log('Registro exitoso', errores);
         } else {
-          console.log('Error al realizar la reserva')
+          console.log('Error al realizar el registro')
         }
       } catch (error) {
-        console.log("Este es el error ", error);
+        console.log("Este es el error en el registro ", error);
       }
     }
   }
@@ -224,6 +228,11 @@ function SignUp() {
     validarContrasena1(contrasena1),
       [contrasena1]
   });
+
+  useEffect(() => {
+    validarErrores(),
+      [enviados]
+  })
 
 
   return (
@@ -278,7 +287,7 @@ function SignUp() {
                     <Select
                       labelId="type-id"
                       id="type-id"
-                      value={tipoDocumento.toString}
+                      value={tipoDocumento}
                       label="Tipo de Identificación"
                       onChange={handleChangeTipo}
                     >
@@ -357,7 +366,7 @@ function SignUp() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={handleChangeName}
+              onClick={handleSubmit}
             >
               Registrarse
             </Button>
