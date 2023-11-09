@@ -16,7 +16,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Axios from 'axios';
 import { useEffect, useState } from 'react';
-
+import { Alert, Snackbar } from '@mui/material';
+import { SnackbarProvider, VariantType, enqueueSnackbar, useSnackbar } from 'notistack';
 
 
 const defaultTheme = createTheme();
@@ -125,6 +126,7 @@ function SignUp() {
   const validarErrores = () => {
     if (validarVacio(nombres) || validarVacio(apellidos) || validarVacio(numeroDocumento) || validarVacio(correo) || validarVacio(telefono) || validarVacio(contrasena) || validarVacio(contrasena1) || (errorNombres) || (errorApellidos) || (errorNumeroDocumento) || (errorCorreo) || (errorTelefono) || (errorContrasena) || (errorContrasena1)) {
       setErrores(true);
+      return enqueueSnackbar('Tiene errores en el formulario, revise nuevamente');
     } else {
       setErrores(false);
     }
@@ -166,6 +168,7 @@ function SignUp() {
   /* Función para enviar los datos al back */
   const handleSubmit = async () => {
 
+    scrollTop();
     if (errores == true) {
       console.log("Hay campos vacíos o tiene errores en el formulario, verifique")
     } else {
@@ -230,16 +233,19 @@ function SignUp() {
   });
 
   useEffect(() => {
-    validarErrores(),
-      [enviados]
+    validarErrores();
   })
 
+  const scrollTop = () => {
+    window.scroll(0, 0);
+  }
 
   return (
 
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
+
         <Box
           sx={{
             marginTop: 8,
