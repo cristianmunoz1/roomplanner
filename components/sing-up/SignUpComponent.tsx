@@ -13,7 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import Axios from 'axios';
 import { useEffect, useState } from 'react';
 
@@ -51,12 +51,21 @@ function SignUp() {
   const [errorTelefono, setErrorTelefono] = useState(false);
   const [errorContrasena, setErrorContrasena] = useState(false);
   const [errorContrasena1, setErrorContrasena1] = useState(false);
-
+  const [vacios, setVacios] = useState(false);
   /* Funciones para validar que los campos sean correctos */
+  const validarVacio = (cadena: string): boolean => {
+    if (cadena.length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+
+  }
+
   const validarNombres = (nombres: string) => {
     const expRegNombres = /^[A-Za-zÑñÁáÉéÍíÓóÚú\s]{3,}$/u;
     const validacionNombres = expRegNombres.test(nombres);
-    if (nombres.length === 0 || validacionNombres) {
+    if (validarVacio(nombres) || validacionNombres) {
       setErrorNombres(false);
     } else {
       setErrorNombres(true);
@@ -66,7 +75,7 @@ function SignUp() {
   const validarApellidos = (apellidos: string) => {
     const expRegApellidos = /^[A-Za-zÑñÁáÉéÍíÓóÚú\s]{3,}$/u;
     const validacionApellidos = expRegApellidos.test(apellidos);
-    if (apellidos.length === 0 || validacionApellidos) {
+    if (validarVacio(apellidos) || validacionApellidos) {
       setErrorApellidos(false);
     } else {
       setErrorApellidos(true);
@@ -88,18 +97,25 @@ function SignUp() {
   }
 
   const validarCorreo = (correo: string) => {
-    const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-    setErrorCorreo(emailPattern.test(correo));
+    const emailPattern = /^(?:[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}|)$/;
+    const errorCorreo1 = emailPattern.test(correo)
+    setErrorCorreo(!errorCorreo1);
   }
 
   const validarTelefono = (telefono: string) => {
-    const expRegTelefono = /^3\d{9}$/;
-    setErrorTelefono(expRegTelefono.test(telefono));
+    const expRegTelefono = /^(3\d{9})?$/;
+    setErrorTelefono(!expRegTelefono.test(telefono));
   }
 
   const validarContrasena = (contrasena: string) => {
-    const expRegContrasena = /^(?=.*[A-ZÑ])(?=.*[a-z])(?=.*\d)(?=.*[.,;])[A-Za-zÑñ\d.,;]{10,20}$/;
-    setErrorContrasena(expRegContrasena.test(contrasena));
+    const expRegContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{10,20}$/
+
+    if (contrasena.length === 0) {
+      setErrorContrasena(false);
+    } else {
+      setErrorContrasena(!expRegContrasena.test(contrasena));
+    }
+
   }
 
   const validarContrasena1 = (contrasena1: string) => {
@@ -132,6 +148,9 @@ function SignUp() {
     setCorreo(event.target.value);
   }
 
+  const handleChangeTelefono = (event) => {
+    setTelefono(event.target.value);
+  }
 
   const handleChangeContrasena = (event) => {
     setContrasena(event.target.value);
@@ -141,26 +160,71 @@ function SignUp() {
     setContrasena1(event.target.value);
   }
 
+  /* Función para enviar los datos al back */
+  const handleSubmit = async () => {
+
+    if (validarVacio(nombres) || validarVacio(apellidos) || validarVacio(numeroDocumento) || validarVacio(correo) || validarVacio(telefono) || validarVacio(contrasena) || validarVacio(contrasena1)) {
+      setVacios(true);
+    } else {
+      setVacios(false);
+
+      try {
+        const response = await Axios.post('api', {
+          nombres,
+          apellidos,
+          tipoDocumento,
+          numeroDocumento,
+          correo,
+          telefono,
+          contrasena,
+        });
+        if (response.status === 200) {
+          console.log('Reserva exitosa');
+        } else {
+          console.log('Error al realizar la reserva')
+        }
+      } catch (error) {
+        console.log("Este es el error ", error);
+      }
+    }
+  }
+
   /* Funciones para manejar los cambios de estado y asignar errores a los campos */
-  /*   useEffect(() => {
-      
-      , [apellidos]
-    }); */
-
-
   useEffect(() => {
     validarNombres(nombres),
       [nombres]
   });
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+  useEffect(() => {
+    validarApellidos(apellidos),
+      [apellidos]
+  });
+
+  useEffect(() => {
+    validarNumeroIdentificacion(numeroDocumento),
+      [numeroDocumento]
+  });
+
+  useEffect(() => {
+    validarCorreo(correo),
+      [correo]
+  });
+
+  useEffect(() => {
+    validarTelefono(telefono),
+      [telefono]
+  });
+
+  useEffect(() => {
+    validarContrasena(contrasena),
+      [contrasena]
+  });
+
+  useEffect(() => {
+    validarContrasena1(contrasena1),
+      [contrasena1]
+  });
+
 
   return (
 
@@ -203,6 +267,7 @@ function SignUp() {
                   label="Apellidos"
                   name="lastName"
                   error={errorApellidos}
+                  onChange={handleChangeApellidos}
                   autoComplete="family-name"
                 />
               </Grid>
@@ -215,7 +280,7 @@ function SignUp() {
                       id="type-id"
                       value={tipoDocumento.toString}
                       label="Tipo de Identificación"
-                      onChange={handleChange}
+                      onChange={handleChangeTipo}
                     >
                       <MenuItem value={1}>Cedula de ciudadania</MenuItem>
                       <MenuItem value={2}>Cedula de extranjeria</MenuItem>
@@ -232,6 +297,8 @@ function SignUp() {
                   id="cedula"
                   label="Numero de documento"
                   name="cedula"
+                  error={errorNumeroDocumento}
+                  onChange={handleChangeNumeroIdentificacion}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -242,6 +309,8 @@ function SignUp() {
                   label="Correo electrónico"
                   name="email"
                   autoComplete="email"
+                  error={errorCorreo}
+                  onChange={handleChangeCorreo}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -252,6 +321,8 @@ function SignUp() {
                   label="Número telefónico"
                   name="telefono"
                   autoComplete="telefono"
+                  error={errorTelefono}
+                  onChange={handleChangeTelefono}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -260,9 +331,11 @@ function SignUp() {
                   fullWidth
                   name="password1"
                   label="Contraseña"
-                  type="password1"
+                  type="password"
                   id="password1"
                   autoComplete="new-password1"
+                  error={errorContrasena}
+                  onChange={handleChangeContrasena}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -271,9 +344,11 @@ function SignUp() {
                   fullWidth
                   name="password2"
                   label="Repetir contraseña"
-                  type="password2"
+                  type="password"
                   id="password2"
                   autoComplete="new-password2"
+                  error={errorContrasena1}
+                  onChange={handleChangeContrasena1}
                 />
               </Grid>
             </Grid>
