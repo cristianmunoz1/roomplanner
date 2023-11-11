@@ -49,12 +49,6 @@ const Header = (props: HeaderProps) => {
                     Iniciar sesión
                 </Button>
             </Toolbar>
-            <Toolbar
-                component="nav"
-                variant="dense"
-                sx={{ justifyContent: 'space-between', overflowX: 'auto' }}
-            >
-            </Toolbar>
         </React.Fragment >
     );
 }
