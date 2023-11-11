@@ -170,10 +170,7 @@ function SignUp() {
       console.log("Hay campos vacíos o tiene errores en el formulario, verifique")
     } else {
       try {
-        const response = {
-          status: 200,
-        }
-        /* const response = await Axios.post('api', {
+        const response = await Axios.post('api', {
           nombres,
           apellidos,
           tipoDocumento,
@@ -181,7 +178,7 @@ function SignUp() {
           correo,
           telefono,
           contrasena,
-        }); */
+        });
         if (response.status === 200) {
           console.log('Registro exitoso', errores);
         } else {

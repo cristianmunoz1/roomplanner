@@ -12,18 +12,53 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from '../header/HeaderComponent';
 import 'tailwindcss/tailwind.css';
+import Axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const defaultTheme = createTheme();
 
+
+
+
 function SignInComponent() {
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        try {
+            const response = await Axios.post('api', {
+                usuario,
+                password
+            });
+            if (response.status === 200) {
+                console.log('Ingreso exitoso');
+            } else {
+                console.log('Error al realizar el ingreso')
+            }
+        } catch (error) {
+            console.log("Este es el error en el ingreso ", error);
+        }
     };
+
+    useEffect(() => {
+        console.log(usuario),
+            [usuario]
+    })
+
+    useEffect(() => {
+        console.log(password),
+            [password]
+    })
+
+    const [usuario, setUsuario] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleChangeUsuario = (event) => {
+        setUsuario(event.target.value)
+    }
+
+    const handleChangePassword = (event) => {
+        setPassword(event.target.value)
+    }
+
+
 
     return (
 
@@ -72,6 +107,7 @@ function SignInComponent() {
                                 id="email"
                                 label="Correo electrónico"
                                 name="email"
+                                onChange={handleChangeUsuario}
                                 autoComplete="email"
                                 autoFocus
                             />
@@ -81,6 +117,7 @@ function SignInComponent() {
                                 fullWidth
                                 name="password"
                                 label="Contraseña"
+                                onChange={handleChangePassword}
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
