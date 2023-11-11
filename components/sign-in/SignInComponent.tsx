@@ -24,12 +24,12 @@ const defaultTheme = createTheme();
 function SignInComponent() {
     const handleSubmit = async () => {
         try {
-            const response = await Axios.post('api', {
+            const response = await Axios.post('`http://localhost:8090/roomplanner/api/customer/checkcredentials/${encodeURIComponent(correo)}/${encodeURIComponent(contraseña)}`;', {
                 usuario,
                 password
             });
             if (response.status === 200) {
-                console.log('Ingreso exitoso');
+                console.log("Conexión exitosa");
             } else {
                 console.log('Error al realizar el ingreso')
             }
