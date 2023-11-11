@@ -29,9 +29,10 @@ function SignInComponent() {
             });
             if (response.status === 200) {
                 console.log("Conexión exitosa");
-                if (response.data) {
+                if (response.data === true) {
                     console.log("El usuario y la contraseña son válidos")
                 } else {
+                    console.log()
                     console.log("El usuario y la contraseña NO son válidos")
                 }
             } else {
