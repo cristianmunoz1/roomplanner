@@ -28,7 +28,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "const/cardsContent.tsx"  ],
+, "const/cardsContent.tsx", "components/map/MapComponent.js", "components/map/MapView.tsx"  ],
   "exclude": [
     "node_modules"
   ]

@@ -28,7 +28,6 @@ export default function RoomDetailsComponent(props: roomDetailsProps) {
                     image5={props.image5}
                 />
 
-
             </Container>
         </Container>
     );
