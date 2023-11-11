@@ -24,12 +24,17 @@ const defaultTheme = createTheme();
 function SignInComponent() {
     const handleSubmit = async () => {
         try {
-            const response = await Axios.post('http://localhost:8090/roomplanner/api/customer/checkcredentials/${usuario}/${password}', {
-                usuario,
-                password
+            const response = await Axios.get(`http://localhost:8090/roomplanner/api/customer/checkcredentials/${usuario}/${password}`, {
+
             });
             if (response.status === 200) {
-                console.log('Ingreso exitoso');
+                console.log("Conexión exitosa");
+                if (response.data === true) {
+                    console.log("El usuario y la contraseña son válidos");
+                } else {
+                    console.log(response.data, usuario, password);
+                    console.log("El usuario y la contraseña NO son válidos");
+                }
             } else {
                 console.log('Error al realizar el ingreso')
             }
@@ -41,22 +46,22 @@ function SignInComponent() {
     useEffect(() => {
         console.log(usuario),
             [usuario]
-    })
-
+    });
+    
     useEffect(() => {
         console.log(password),
             [password]
-    })
+    });
 
     const [usuario, setUsuario] = useState('');
     const [password, setPassword] = useState('');
 
     const handleChangeUsuario = (event) => {
-        setUsuario(event.target.value)
+        setUsuario(event.target.value);
     }
-
+    
     const handleChangePassword = (event) => {
-        setPassword(event.target.value)
+        setPassword(event.target.value);
     }
 
 
