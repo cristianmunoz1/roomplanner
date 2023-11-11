@@ -14,6 +14,7 @@ import Header from '../header/HeaderComponent';
 import 'tailwindcss/tailwind.css';
 import Axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Container } from '@mui/material';
 
 const defaultTheme = createTheme();
 
@@ -21,7 +22,7 @@ const defaultTheme = createTheme();
 
 
 function SignInComponent() {
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async () => {
         try {
             const response = await Axios.post('api', {
                 usuario,
@@ -99,7 +100,7 @@ function SignInComponent() {
                         <Typography component="h1" variant="h5">
                             Inicia Sesión en Roomplanner
                         </Typography>
-                        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                        <Container >
                             <TextField
                                 margin="normal"
                                 required
@@ -123,10 +124,8 @@ function SignInComponent() {
                                 autoComplete="current-password"
                             />
                             <Button
-                                type="submit"
+                                onClick={handleSubmit}
                                 fullWidth
-
-                                sx={{ mt: 3, mb: 2 }}
                                 className='btn bg-blue-600 hover:bg-blue-700 text-white hover:shadow-md hover:shadow-blue-700'
                             >
                                 Iniciar Sesión
@@ -143,11 +142,11 @@ function SignInComponent() {
                                     </Link>
                                 </Grid>
                             </Grid>
-                        </Box>
+                        </Container>
                     </Box>
                 </Grid>
             </Grid>
-        </ThemeProvider>
+        </ThemeProvider >
 
     );
 
