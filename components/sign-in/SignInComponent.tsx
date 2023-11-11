@@ -12,18 +12,54 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from '../header/HeaderComponent';
 import 'tailwindcss/tailwind.css';
+import Axios from 'axios';
+import { useEffect, useState } from 'react';
+import { Container } from '@mui/material';
 
 const defaultTheme = createTheme();
 
+
+
+
 function SignInComponent() {
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+    const handleSubmit = async () => {
+        try {
+            const response = await Axios.post('http://localhost:8090/roomplanner/api/customer/checkcredentials/${usuario}/${password}', {
+                usuario,
+                password
+            });
+            if (response.status === 200) {
+                console.log('Ingreso exitoso');
+            } else {
+                console.log('Error al realizar el ingreso')
+            }
+        } catch (error) {
+            console.log("Este es el error en el ingreso ", error);
+        }
     };
+
+    useEffect(() => {
+        console.log(usuario),
+            [usuario]
+    })
+
+    useEffect(() => {
+        console.log(password),
+            [password]
+    })
+
+    const [usuario, setUsuario] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleChangeUsuario = (event) => {
+        setUsuario(event.target.value)
+    }
+
+    const handleChangePassword = (event) => {
+        setPassword(event.target.value)
+    }
+
+
 
     return (
 
@@ -64,7 +100,7 @@ function SignInComponent() {
                         <Typography component="h1" variant="h5">
                             Inicia Sesión en Roomplanner
                         </Typography>
-                        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                        <Container >
                             <TextField
                                 margin="normal"
                                 required
@@ -72,6 +108,7 @@ function SignInComponent() {
                                 id="email"
                                 label="Correo electrónico"
                                 name="email"
+                                onChange={handleChangeUsuario}
                                 autoComplete="email"
                                 autoFocus
                             />
@@ -81,15 +118,14 @@ function SignInComponent() {
                                 fullWidth
                                 name="password"
                                 label="Contraseña"
+                                onChange={handleChangePassword}
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
                             />
                             <Button
-                                type="submit"
+                                onClick={handleSubmit}
                                 fullWidth
-
-                                sx={{ mt: 3, mb: 2 }}
                                 className='btn bg-blue-600 hover:bg-blue-700 text-white hover:shadow-md hover:shadow-blue-700'
                             >
                                 Iniciar Sesión
@@ -106,11 +142,11 @@ function SignInComponent() {
                                     </Link>
                                 </Grid>
                             </Grid>
-                        </Box>
+                        </Container>
                     </Box>
                 </Grid>
             </Grid>
-        </ThemeProvider>
+        </ThemeProvider >
 
     );
 
