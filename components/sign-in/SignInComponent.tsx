@@ -24,14 +24,15 @@ const defaultTheme = createTheme();
 function SignInComponent() {
     const handleSubmit = async () => {
         try {
-            const response = await Axios.get('http://localhost:8090/roomplanner/api/customer/checkcredentials/${encodeURIComponent(usuario)}/${encodeURIComponent(password)}', {
+            const response = await Axios.get('http://localhost:8090/roomplanner/api/customer/checkcredentials/{usuario}/{password}', {
 
             });
             if (response.status === 200) {
                 console.log("Conexión exitosa");
-                if (response.data) {
+                if (response.data === true) {
                     console.log("El usuario y la contraseña son válidos")
                 } else {
+                    console.log(response.data,usuario,password)
                     console.log("El usuario y la contraseña NO son válidos")
                 }
             } else {
