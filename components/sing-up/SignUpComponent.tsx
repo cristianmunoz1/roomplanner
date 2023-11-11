@@ -16,8 +16,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Alert, Snackbar } from '@mui/material';
-//import { SnackbarProvider, VariantType, enqueueSnackbar, useSnackbar } from 'notistack';
 
 
 const defaultTheme = createTheme();
@@ -33,7 +31,6 @@ function SignUp() {
   const [telefono, setTelefono] = useState('');
   const [contrasena, setContrasena] = useState('');
   const [contrasena1, setContrasena1] = useState('');
-  const [enviados, setEnviados] = useState('');
 
   /* Hooks para guardar errores en los campos */
   const [errorNombres, setErrorNombres] = useState(false);
