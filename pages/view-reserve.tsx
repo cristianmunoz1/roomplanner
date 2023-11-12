@@ -4,7 +4,9 @@ import ViewBookingComponent from '../components/viewer/ViewBookingComponent';
 
 export default function Visualizar() {
     return (
-        <DrawerComponent/>
-        <ViewBookingComponent/> 
+        <>
+        <DrawerComponent />
+        
+        </> 
     );
 }
