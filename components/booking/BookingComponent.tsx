@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Grid, Paper, Typography, TextField, Select, MenuItem, Button, Container } from '@mui/material';
 import { differenceInCalendarDays, format, addDays } from 'date-fns';
 import Axios from 'axios';
-import emailjs from '@emailjs/browser' 
+import emailjs from '@emailjs/browser'
 
 export default function BookingComponent() {
 
@@ -28,16 +28,30 @@ export default function BookingComponent() {
 
     const handleReserva = async () => {
         try {
-            const response = await Axios.post('api', {
+           /* const response = await Axios.post('api', {
                 fechaIngreso,
                 fechaSalida,
                 tipoHabitacion,
-            });
-            let valuesForm = {
-                send_to: ''
-            }
-            if (response.status === 200) {
-                
+            });*/
+
+            if (200 === 200) {
+                try {
+                    let templateParams = {
+                        email: 'andres.granda1@udea.edu.co',
+                        dateEntry: fechaIngreso,
+                        dateExit: fechaSalida,
+                        typeRoom: tipoHabitacion,
+                    }
+
+                    emailjs.send('service_f8t08bi', 'template_ldr8o9f', templateParams, '9GTFpyOQPk9fQJAkm')
+                        .then(function (response) {
+                            alert('SUCCESS')
+                        }, function (error) {
+                            alert('FAILED')
+                        })
+                } catch (error) {
+                    console.log("~file: index.js:12 ~ onSubmit ~error:", error)
+                }
                 console.log('Reserva exitosa');
             } else {
                 console.log('Error al realizar la reserva')
@@ -150,3 +164,7 @@ export default function BookingComponent() {
         </Paper >
     );
 };
+
+
+//mis reservas[1]
+//todas las reservas[2]
