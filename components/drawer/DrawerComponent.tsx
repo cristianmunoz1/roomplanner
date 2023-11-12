@@ -19,6 +19,9 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import ViewBookingComponent from '../viewer/ViewBookingComponent';
+import Link from 'next/link';
+import 'tailwindcss/tailwind.css';
+import HomeIcon from '@mui/icons-material/Home';
 
 const drawerWidth = 240;
 
@@ -137,21 +140,27 @@ export default function PersistentDrawerLeft() {
                 <List>
                     {['Volver a la pagina como Cliente'].map((text, index) => (
                         <ListItem key={text} disablePadding>
+                            <Link href='/'>
                             <ListItemButton>
                                 <ListItemIcon>
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                    
+                                        <HomeIcon/>
+                                
                                 </ListItemIcon>
                                 <ListItemText primary={text} />
                             </ListItemButton>
+                            </Link>
                         </ListItem>
                     ))}
                 </List>
             </Drawer>
             <Main open={open}>
                 <DrawerHeader />
-                <Typography className='text-4xl'>
+                <Typography className='text-2xl'>
                     A continuacuión el usuario con rol administrador podra visualizar las reservas actuales hasta el momento, dada por la siguiente tabla que contienne la estructura de datos, planetada en el formulario de realizar reserva:
                 </Typography>
+                
+                <br/>
                 <ViewBookingComponent />
             </Main>
         </Box>

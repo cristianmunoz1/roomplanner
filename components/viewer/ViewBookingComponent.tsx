@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@material-ui/data-grid';
+import 'tailwindcss/tailwind.css'
+
 
 const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 90 },
@@ -52,7 +54,7 @@ const rows = [
 export default function DataTable() {
     return (
         <div style={{ height: 400, width: '100%' }}>
-            <DataGrid
+            <DataGrid className=''
                 rows={rows}
                 columns={columns}
                 pageSize={5}

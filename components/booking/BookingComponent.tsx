@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Grid, Paper, Typography, TextField, Select, MenuItem, Button, Container } from '@mui/material';
 import { differenceInCalendarDays, format, addDays } from 'date-fns';
 import Axios from 'axios';
+import emailjs from '@emailjs/browser' 
 
 export default function BookingComponent() {
 
@@ -32,8 +33,11 @@ export default function BookingComponent() {
                 fechaSalida,
                 tipoHabitacion,
             });
-
+            let valuesForm = {
+                send_to: ''
+            }
             if (response.status === 200) {
+                
                 console.log('Reserva exitosa');
             } else {
                 console.log('Error al realizar la reserva')
