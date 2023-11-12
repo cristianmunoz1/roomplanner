@@ -5,33 +5,36 @@ const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 90 },
     {
         field: 'firstName',
-        headerName: 'First name',
+        headerName: 'Nombres',
         width: 150,
         editable: true,
     },
     {
         field: 'lastName',
-        headerName: 'Last name',
+        headerName: 'Apellidos',
         width: 150,
         editable: true,
     },
     {
-        field: 'age',
-        headerName: 'Age',
-        type: 'number',
-        width: 110,
+        field: 'dateEntry',
+        headerName: 'Fecha de Ingreso',
+        width: 200,
         editable: true,
     },
     {
-        field: 'fullName',
-        headerName: 'Full name',
-        description: 'This column has a value getter and is not sortable.',
-        sortable: false,
-        width: 160,
-        valueGetter: (params: GridValueGetterParams) =>
-            `${params.getValue(params.id, 'firstName') || ''} ${params.getValue(params.id, 'lastName') || ''
-            }`,
+        field: 'dateExit',
+        headerName: 'Fecha de Salida',
+        width: 200,
+        editable: true,
     },
+    {
+        field: 'price',
+        headerName: 'Costo total',
+        type: "number",
+        width: 180,
+        editable: true,
+    },
+    
 ];
 
 const rows = [
