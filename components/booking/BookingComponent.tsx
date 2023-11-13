@@ -39,26 +39,26 @@ export default function BookingComponent() {
 
             if (200 === 200) {
                 try {
-                    if(userData === null){
+                    if (userData === null) {
                         console.log(userData);
-                    }else{
-                    let templateParams = {
-                        //En vez de que quemar el correo, tomariamos el de la sesión en el momento
-                        // Falta hacer el calculo para el envio del precio
-                        to_name: userData.nombres,
-                        to_email: userData.correo,
-                        date_entry: fechaIngreso,
-                        date_exit: fechaSalida,
-                        type_room: tipoHabitacion,
-                        precio: precioActual,
-                    }
+                    } else {
+                        let templateParams = {
+                            //En vez de que quemar el correo, tomariamos el de la sesión en el momento
+                            // Falta hacer el calculo para el envio del precio
+                            to_name: userData.nombres,
+                            to_email: userData.correo,
+                            date_entry: fechaIngreso,
+                            date_exit: fechaSalida,
+                            type_room: tipoHabitacion,
+                            precio: precioActual,
+                        }
 
-                    emailjs.send('service_4erds6r', 'template_mub21rj', templateParams, 'u9tf-R5IZ4kBQ_Ylf')
-                        .then(function (response) {
-                            alert('Reserva realizada con Exito')
-                        }, function (error) {
-                            alert('Algo ha fallado')
-                        })
+                        emailjs.send('service_4erds6r', 'template_mub21rj', templateParams, 'u9tf-R5IZ4kBQ_Ylf')
+                            .then(function (response) {
+                                alert('Reserva realizada con Exito')
+                            }, function (error) {
+                                alert('Algo ha fallado')
+                            })
                     }
                 } catch (error) {
                     console.log("~file: index.js:12 ~ onSubmit ~error:", error)
