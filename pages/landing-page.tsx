@@ -11,23 +11,10 @@ import PriceCalculatorComponent from '../components/price-calculator-component/P
 import { Box, Typography } from '@mui/material';
 import contenidoTarjetas from '../const/cardsContent';
 import LandingCardComponent from '../components/landing-cards/LandingCardComponent';
-import { TRUE } from 'sass';
-import { Griffy } from 'next/font/google';
-
-
-
-/* const sections = [
-  { title: 'Technology', url: '#' },
-  { title: 'Design', url: '#' },
-  { title: 'Culture', url: '#' },
-  { title: 'Business', url: '#' },
-  { title: 'Politics', url: '#' },
-  { title: 'Opinion', url: '#' },
-  { title: 'Science', url: '#' },
-  { title: 'Health', url: '#' },
-  { title: 'Style', url: '#' },
-  { title: 'Travel', url: '#' },
-]; */
+import { useRouter } from 'next/navigation';
+import HeaderSesion from '../components/header-sesion/HeaderSesionComponent';
+import { Button } from '@material-ui/core';
+import router from 'next'
 
 const mainFeaturedPost = {
   title: 'Abre la puerta a un mundo nuevo.',
@@ -79,6 +66,12 @@ const featuredPosts = [
 
 
 export default function Blog() {
+
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push('booking-page');
+  };
   return (
     <>
       <Header title="ROOMPLANNER" />
@@ -106,7 +99,11 @@ export default function Blog() {
             <Main title="From the firehose" posts={posts} />
 
           </Grid>*/}
-
+          <Container className='flex items-center content-center flex-col w-full'>
+            <Button onClick={handleClick} className='w-48 center mt-10 bg-blue-500 hover:bg-blue-600 hover:shadow-md hover:shadow-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded w-64 h-20 text-xl' size="small">
+              ¡Realice su reserva AHORA!
+            </Button>
+          </Container>
           <Box sx={{
             position: 'relative',
             mt: 10,
@@ -114,9 +111,9 @@ export default function Blog() {
             <PriceCalculatorComponent></PriceCalculatorComponent>
           </Box>
 
-        </main>
+        </main >
       </Container >
-      
+
       <Footer
         title="Roomplanner"
         description="Hotel Cinco estrellas, Medellin, Antioquia "
@@ -124,3 +121,4 @@ export default function Blog() {
     </>
   );
 }
+

@@ -15,3 +15,5 @@ let globalVariable: User = {
     correo: '',
     telefono: '',
 };
+
+export default globalVariable;
