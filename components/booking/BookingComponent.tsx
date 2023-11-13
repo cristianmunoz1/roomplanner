@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid, Paper, Typography, TextField, Select, MenuItem, Button, Container } from '@mui/material';
 import { differenceInCalendarDays, format, addDays } from 'date-fns';
 import Axios from 'axios';
@@ -29,6 +29,7 @@ export default function BookingComponent() {
 
     const handleReserva = async () => {
         try {
+            //calculatePrice();
             /* const response = await Axios.post('api', {
                  fechaIngreso,
                  fechaSalida,
@@ -44,7 +45,7 @@ export default function BookingComponent() {
                         date_entry: fechaIngreso,
                         date_exit: fechaSalida,
                         type_room: tipoHabitacion,
-                        precio: calculatePrice,
+                        precio: precioActual,
                     }
 
                     emailjs.send('service_4erds6r', 'template_mub21rj', templateParams, 'u9tf-R5IZ4kBQ_Ylf')
@@ -87,7 +88,13 @@ export default function BookingComponent() {
 
     };
 
+    useEffect(() => {
+        calculatePrice(),
+            [fechaIngreso, fechaSalida, tipoHabitacion]
+    });
+
     const handletipoHabitacionChange = (event) => {
+
         setTipoHabitacion(event.target.value);
     };
 
