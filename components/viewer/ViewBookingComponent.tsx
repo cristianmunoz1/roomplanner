@@ -8,13 +8,13 @@ const columns: GridColDef[] = [
     {
         field: 'firstName',
         headerName: 'Nombres',
-        width: 150,
+        width: 200,
         editable: true,
     },
     {
         field: 'lastName',
         headerName: 'Apellidos',
-        width: 150,
+        width: 200,
         editable: true,
     },
     {
@@ -33,7 +33,7 @@ const columns: GridColDef[] = [
         field: 'price',
         headerName: 'Costo total',
         type: "number",
-        width: 180,
+        width: 200,
         editable: true,
     },
     
@@ -54,7 +54,7 @@ const rows = [
 export default function DataTable() {
     return (
         <div style={{ height: 400, width: '100%' }}>
-            <DataGrid className=''
+            <DataGrid className='flex'
                 rows={rows}
                 columns={columns}
                 pageSize={5}
