@@ -22,6 +22,9 @@ import ViewBookingComponent from '../viewer/ViewBookingComponent';
 import Link from 'next/link';
 import 'tailwindcss/tailwind.css';
 import HomeIcon from '@mui/icons-material/Home';
+import BookmarksOutlinedIcon from '@mui/icons-material/BookmarksOutlined';
+import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined';
+import Footer from '../footer/FooterComponent';
 
 const drawerWidth = 240;
 
@@ -86,6 +89,7 @@ export default function PersistentDrawerLeft() {
         setOpen(false);
     };
 
+
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
@@ -123,46 +127,50 @@ export default function PersistentDrawerLeft() {
                         {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </IconButton>
                 </DrawerHeader>
-                <Divider />
-                <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                </ListItemIcon>
-                                <ListItemText primary={text} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-                <Divider />
                 <List>
                     {['Volver a la pagina como Cliente'].map((text, index) => (
                         <ListItem key={text} disablePadding>
                             <Link href='/'>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    
-                                        <HomeIcon/>
-                                
-                                </ListItemIcon>
-                                <ListItemText primary={text} />
-                            </ListItemButton>
+                                <ListItemButton >
+                                    <ListItemIcon>
+                                        <HomeIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary={text} />
+                                </ListItemButton>
                             </Link>
                         </ListItem>
                     ))}
                 </List>
+                <Divider />
+                <List>
+                    {['Reservas', 'Mis reservas'].map((text, index) => (
+                        <ListItem key={text} disablePadding>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    {index === 0 ? <AutoStoriesOutlinedIcon/>: <BookmarksOutlinedIcon /> }
+                                </ListItemIcon>
+                                <ListItemText primary={text} />
+                            </ListItemButton>
+                        </ListItem>
+                        
+                    ))}
+                </List>
+                <Divider />
+                
             </Drawer>
             <Main open={open}>
                 <DrawerHeader />
                 <Typography className='text-2xl'>
-                    A continuacuión el usuario con rol administrador podra visualizar las reservas actuales hasta el momento, dada por la siguiente tabla que contienne la estructura de datos, planetada en el formulario de realizar reserva:
+                    A continuación el usuario con rol administrador podra visualizar las reservas actuales hasta el momento, dada por la siguiente tabla que contienne la estructura de datos, planetada en el formulario de realizar reserva:
                 </Typography>
                 
                 <br/>
                 <ViewBookingComponent />
-            </Main>
+                <Footer
+                    title="Roomplanner"
+                    description="Hotel Cinco estrellas, Medellin, Antioquia "
+                />
+            </Main> 
         </Box>
     );
 }

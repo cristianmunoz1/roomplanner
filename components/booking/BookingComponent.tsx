@@ -3,6 +3,7 @@ import { Grid, Paper, Typography, TextField, Select, MenuItem, Button, Container
 import { differenceInCalendarDays, format, addDays } from 'date-fns';
 import Axios from 'axios';
 import emailjs from '@emailjs/browser'
+import Footer from '../footer/FooterComponent';
 
 export default function BookingComponent() {
 
@@ -28,26 +29,29 @@ export default function BookingComponent() {
 
     const handleReserva = async () => {
         try {
-           /* const response = await Axios.post('api', {
-                fechaIngreso,
-                fechaSalida,
-                tipoHabitacion,
-            });*/
+            /* const response = await Axios.post('api', {
+                 fechaIngreso,
+                 fechaSalida,
+                 tipoHabitacion,
+             });*/
 
             if (200 === 200) {
                 try {
                     let templateParams = {
-                        email: 'andres.granda1@udea.edu.co',
-                        dateEntry: fechaIngreso,
-                        dateExit: fechaSalida,
-                        typeRoom: tipoHabitacion,
+                        //En vez de que quemar el correo, tomariamos el de la sesión en el momento
+                        // Falta hacer el calculo para el envio del precio
+                        email: 'hotelroomplanner@gmail.com',
+                        date_entry: fechaIngreso,
+                        date_exit: fechaSalida,
+                        type_room: tipoHabitacion,
+                        precio: calculatePrice,
                     }
 
-                    emailjs.send('service_f8t08bi', 'template_ldr8o9f', templateParams, '9GTFpyOQPk9fQJAkm')
+                    emailjs.send('service_4erds6r', 'template_mub21rj', templateParams, 'u9tf-R5IZ4kBQ_Ylf')
                         .then(function (response) {
-                            alert('SUCCESS')
+                            alert('Reserva realizada con Exito')
                         }, function (error) {
-                            alert('FAILED')
+                            alert('Algo ha fallado')
                         })
                 } catch (error) {
                     console.log("~file: index.js:12 ~ onSubmit ~error:", error)
@@ -161,10 +165,11 @@ export default function BookingComponent() {
                 </Container>
 
             </Grid>
+            <Footer
+                title="Roomplanner"
+                description="Hotel Cinco estrellas, Medellin, Antioquia "
+            />
         </Paper >
     );
 };
 
-
-//mis reservas[1]
-//todas las reservas[2]
