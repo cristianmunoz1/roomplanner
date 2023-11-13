@@ -41,6 +41,7 @@ export default function BookingComponent() {
                     let templateParams = {
                         //En vez de que quemar el correo, tomariamos el de la sesión en el momento
                         // Falta hacer el calculo para el envio del precio
+                        to_name: 
                         email: 'hotelroomplanner@gmail.com',
                         date_entry: fechaIngreso,
                         date_exit: fechaSalida,

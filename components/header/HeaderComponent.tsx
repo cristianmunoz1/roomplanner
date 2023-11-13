@@ -21,7 +21,7 @@ const Header = (props: HeaderProps) => {
     const handleIniciarsesionClick = () => {
         router.push('signin-page');
     };
-
+    
     const { title } = props;
 
     return (
