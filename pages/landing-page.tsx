@@ -12,7 +12,7 @@ import { Box, Typography } from '@mui/material';
 import contenidoTarjetas from '../const/cardsContent';
 import LandingCardComponent from '../components/landing-cards/LandingCardComponent';
 import { Griffy } from 'next/font/google';
-
+import HeaderSesion from '../components/header-sesion/HeaderSesionComponent';
 
 
 /* const sections = [
@@ -78,48 +78,113 @@ const featuredPosts = [
 
 
 export default function Blog() {
-  return (
-    <>
-      <Header title="ROOMPLANNER" />
-      <CssBaseline />
-      <Container className='h-full' >
 
-        <main>
+  const [userData, setUserData] = React.useState(null);
 
-          <MainFeaturedPost post={mainFeaturedPost} />
+  React.useEffect(() => {
+    const user = sessionStorage.getItem('userData')
+    if (user) {
+      setUserData(JSON.parse(user));
+    }
 
-          <Grid container className='flex flex-col items-center pb-8 underline '>
-            <Typography variant='h4' className='font-serif'>¡Descubre todos los tipos de habitación que tenemos para tí!</Typography>
-          </Grid>
-          <Grid container spacing={4} className=''>
-            {featuredPosts.map((post) => (
-              <FeaturedPost key={post.id} post={post} />
-            ))}
-          </Grid>
-          <Grid container spacing={0} className='pt-20'>
-            {contenidoTarjetas.map((card) => (
-              <LandingCardComponent key={card.id} title={card.title} description={card.description} image={card.image} direction={card.direction} />
-            ))}
-          </Grid>
-          {/*<Grid container spacing={5} sx={{ mt: 3 }}>
+  }, []
+  )
+
+  React.useEffect(() => {
+    console.log(userData),
+      [userData]
+  })
+
+  if (userData != null) {
+    return (
+      <>
+        <HeaderSesion title="ROOMPLANNER" />
+        <CssBaseline />
+        <Container className='h-full' >
+
+          <main>
+
+            <MainFeaturedPost post={mainFeaturedPost} />
+
+            <Grid container className='flex flex-col items-center pb-8 underline '>
+              <Typography variant='h4' className='font-serif'>¡Descubre todos los tipos de habitación que tenemos para tí!</Typography>
+            </Grid>
+            <Grid container spacing={4} className=''>
+              {featuredPosts.map((post) => (
+                <FeaturedPost key={post.id} post={post} />
+              ))}
+            </Grid>
+            <Grid container spacing={0} className='pt-20'>
+              {contenidoTarjetas.map((card) => (
+                <LandingCardComponent key={card.id} title={card.title} description={card.description} image={card.image} direction={card.direction} />
+              ))}
+            </Grid>
+            {/*<Grid container spacing={5} sx={{ mt: 3 }}>
             <Main title="From the firehose" posts={posts} />
 
           </Grid>*/}
 
-          <Box sx={{
-            position: 'relative',
-            mt: 10,
-          }}>
-            <PriceCalculatorComponent></PriceCalculatorComponent>
-          </Box>
+            <Box sx={{
+              position: 'relative',
+              mt: 10,
+            }}>
+              <PriceCalculatorComponent></PriceCalculatorComponent>
+            </Box>
 
-        </main>
-      </Container >
+          </main>
+        </Container >
 
-      <Footer
-        title="Roomplanner"
-        description="Hotel Cinco estrellas, Medellin, Antioquia "
-      />
-    </>
-  );
+        <Footer
+          title="Roomplanner"
+          description="Hotel Cinco estrellas, Medellin, Antioquia "
+        />
+      </>
+    );
+  } else {
+    return (
+      <>
+        <Header title="ROOMPLANNER" />
+        <CssBaseline />
+        <Container className='h-full' >
+
+          <main>
+
+            <MainFeaturedPost post={mainFeaturedPost} />
+
+            <Grid container className='flex flex-col items-center pb-8 underline '>
+              <Typography variant='h4' className='font-serif'>¡Descubre todos los tipos de habitación que tenemos para tí!</Typography>
+            </Grid>
+            <Grid container spacing={4} className=''>
+              {featuredPosts.map((post) => (
+                <FeaturedPost key={post.id} post={post} />
+              ))}
+            </Grid>
+            <Grid container spacing={0} className='pt-20'>
+              {contenidoTarjetas.map((card) => (
+                <LandingCardComponent key={card.id} title={card.title} description={card.description} image={card.image} direction={card.direction} />
+              ))}
+            </Grid>
+            {/*<Grid container spacing={5} sx={{ mt: 3 }}>
+            <Main title="From the firehose" posts={posts} />
+
+          </Grid>*/}
+
+            <Box sx={{
+              position: 'relative',
+              mt: 10,
+            }}>
+              <PriceCalculatorComponent></PriceCalculatorComponent>
+            </Box>
+
+          </main>
+        </Container >
+
+        <Footer
+          title="Roomplanner"
+          description="Hotel Cinco estrellas, Medellin, Antioquia "
+        />
+      </>
+    );
+  }
 }
+
