@@ -7,6 +7,12 @@ import Footer from '../footer/FooterComponent';
 
 export default function BookingComponent() {
 
+    interface bookingI {
+        idUser: string;
+        fechaIngreso: Date,
+        fechaSalida: Date,
+        precio: number,
+    }
 
     const preciosHabitaciones = {
         'Estandar': 60000,
@@ -20,6 +26,34 @@ export default function BookingComponent() {
     const [tipoHabitacion, setTipoHabitacion] = useState('Estandar');
     const [diasSeleccionados, setDiasSeleccionados] = useState(1);
     const [precioActual, setPrecioActual] = useState('');
+    const [fecha1Parseada, setFecha1Parseada] = useState('');
+    const [fecha2Parseada, setFecha2Parseada] = useState('');
+    const [precioNumero, setPrecioNumero] = useState(0);
+    const [userId, setUserId] = useState("");
+    const [booking, setBooking] = useState({});
+
+    useEffect(() => {
+        setBooking({
+            idUser: userData.numeroDocumento,
+            fechaIngreso: fecha1Parseada,
+            fechaSalida: fecha2Parseada,
+            precio: precioNumero,
+
+        })
+            , [fechaIngreso, fechaSalida, tipoHabitacion]
+    })
+
+    useEffect(() => {
+        setFecha1Parseada(fechaIngreso.toISOString().split('T')[0]),
+            [fechaIngreso]
+    });
+
+
+    useEffect(() => {
+        setFecha2Parseada(fechaSalida.toISOString().split('T')[0]),
+            [fechaSalida]
+    });
+
 
     const formatter = new Intl.NumberFormat('es-CO', {
         style: 'currency',
@@ -30,35 +64,42 @@ export default function BookingComponent() {
     const handleReserva = async () => {
         try {
 
-            //calculatePrice();
-            /* const response = await Axios.post('api', {
-                 fechaIngreso,
-                 fechaSalida,
-                 tipoHabitacion,
-             });*/
+            let response: any = {}
 
-            if (200 === 200) {
+            const idUser = userData.numeroDocumento
+            console.log(typeof (idUser), idUser)
+            console.log(typeof (fechaIngreso), fechaIngreso)
+            console.log(typeof (fechaSalida), fechaSalida)
+            console.log(typeof (precioNumero), precioNumero)
+            console.log(booking)
+            response = await Axios.post('http://localhost:8090/roomplanner/api/booking/save', {
+                booking,
+                idUser
+            });
+
+
+
+            if (response.status === 200) {
                 try {
                     if (userData === null) {
-                        console.log(userData);
                     } else {
                         let templateParams = {
                             //En vez de que quemar el correo, tomariamos el de la sesión en el momento
                             // Falta hacer el calculo para el envio del precio
-                            to_name: userData.nombres,
-                            to_email: userData.correo,
-                            date_entry: fechaIngreso,
-                            date_exit: fechaSalida,
+                            to_name: userData?.nombres,
+                            to_email: userData?.correo,
+                            date_entry: fechaIngreso.toISOString().split('T')[0],
+                            date_exit: fechaSalida.toISOString().split('T')[0],
                             type_room: tipoHabitacion,
                             precio: precioActual,
                         }
 
-                        emailjs.send('service_4erds6r', 'template_mub21rj', templateParams, 'u9tf-R5IZ4kBQ_Ylf')
+                        /* emailjs.send('service_4erds6r', 'template_mub21rj', templateParams, 'u9tf-R5IZ4kBQ_Ylf')
                             .then(function (response) {
                                 alert('Reserva realizada con Exito')
                             }, function (error) {
                                 alert('Algo ha fallado')
-                            })
+                            }) */
                     }
                 } catch (error) {
                     console.log("~file: index.js:12 ~ onSubmit ~error:", error)
@@ -95,7 +136,8 @@ export default function BookingComponent() {
     };
 
     useEffect(() => {
-        calculatePrice(),
+        calculatePrice();
+        setPrecioNumero(parseInt(precioActual.replace(/[^\d]/g, '')) + .0),
             [fechaIngreso, fechaSalida, tipoHabitacion]
     });
 
@@ -110,21 +152,21 @@ export default function BookingComponent() {
 
     };
 
-    const [userData, setUserData] = React.useState(null);
+    const [userData, setUserData] = React.useState({});
 
     React.useEffect(() => {
-        const user = sessionStorage.getItem('userData')
-        if (user) {
-            setUserData(JSON.parse(user));
-        }
-
+        const user: {
+            nombres?: string,
+            apellidos?: string,
+            tipoDocumento?: number,
+            numeroDocumento?: string,
+            correo?: string,
+            telefono: string
+        } = JSON.parse(sessionStorage.getItem('userData') || '{}');
+        setUserData(user);
     }, []
     )
 
-    React.useEffect(() => {
-        console.log(userData),
-            [userData]
-    })
 
     return (
         <Paper elevation={3} style={{ padding: '16px', alignItems: 'center', textAlign: 'center' }}>
