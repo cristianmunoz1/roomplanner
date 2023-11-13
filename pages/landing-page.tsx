@@ -11,22 +11,10 @@ import PriceCalculatorComponent from '../components/price-calculator-component/P
 import { Box, Typography } from '@mui/material';
 import contenidoTarjetas from '../const/cardsContent';
 import LandingCardComponent from '../components/landing-cards/LandingCardComponent';
-import { Griffy } from 'next/font/google';
+import { useRouter } from 'next/navigation';
 import HeaderSesion from '../components/header-sesion/HeaderSesionComponent';
-
-
-/* const sections = [
-  { title: 'Technology', url: '#' },
-  { title: 'Design', url: '#' },
-  { title: 'Culture', url: '#' },
-  { title: 'Business', url: '#' },
-  { title: 'Politics', url: '#' },
-  { title: 'Opinion', url: '#' },
-  { title: 'Science', url: '#' },
-  { title: 'Health', url: '#' },
-  { title: 'Style', url: '#' },
-  { title: 'Travel', url: '#' },
-]; */
+import { Button } from '@material-ui/core';
+import router from 'next'
 
 const mainFeaturedPost = {
   title: 'Abre la puerta a un mundo nuevo.',
@@ -79,112 +67,58 @@ const featuredPosts = [
 
 export default function Blog() {
 
-  const [userData, setUserData] = React.useState(null);
+  const router = useRouter();
 
-  React.useEffect(() => {
-    const user = sessionStorage.getItem('userData')
-    if (user) {
-      setUserData(JSON.parse(user));
-    }
+  const handleClick = () => {
+    router.push('booking-page');
+  };
+  return (
+    <>
+      <Header title="ROOMPLANNER" />
+      <CssBaseline />
+      <Container className='h-full' >
 
-  }, []
-  )
+        <main>
 
-  React.useEffect(() => {
-    console.log(userData),
-      [userData]
-  })
+          <MainFeaturedPost post={mainFeaturedPost} />
 
-  if (userData != null) {
-    return (
-      <>
-        <HeaderSesion title="ROOMPLANNER" />
-        <CssBaseline />
-        <Container className='h-full' >
-
-          <main>
-
-            <MainFeaturedPost post={mainFeaturedPost} />
-
-            <Grid container className='flex flex-col items-center pb-8 underline '>
-              <Typography variant='h4' className='font-serif'>¡Descubre todos los tipos de habitación que tenemos para tí!</Typography>
-            </Grid>
-            <Grid container spacing={4} className=''>
-              {featuredPosts.map((post) => (
-                <FeaturedPost key={post.id} post={post} />
-              ))}
-            </Grid>
-            <Grid container spacing={0} className='pt-20'>
-              {contenidoTarjetas.map((card) => (
-                <LandingCardComponent key={card.id} title={card.title} description={card.description} image={card.image} direction={card.direction} />
-              ))}
-            </Grid>
-            {/*<Grid container spacing={5} sx={{ mt: 3 }}>
+          <Grid container className='flex flex-col items-center pb-8 underline '>
+            <Typography variant='h4' className='font-serif'>¡Descubre todos los tipos de habitación que tenemos para tí!</Typography>
+          </Grid>
+          <Grid container spacing={4} className=''>
+            {featuredPosts.map((post) => (
+              <FeaturedPost key={post.id} post={post} />
+            ))}
+          </Grid>
+          <Grid container spacing={0} className='pt-20'>
+            {contenidoTarjetas.map((card) => (
+              <LandingCardComponent key={card.id} title={card.title} description={card.description} image={card.image} direction={card.direction} />
+            ))}
+          </Grid>
+          {/*<Grid container spacing={5} sx={{ mt: 3 }}>
             <Main title="From the firehose" posts={posts} />
 
           </Grid>*/}
+          <Container className='flex items-center content-center flex-col w-full'>
+            <Button onClick={handleClick} className='w-48 center mt-10 bg-blue-500 hover:bg-blue-600 hover:shadow-md hover:shadow-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded w-64 h-20 text-xl' size="small">
+              ¡Realice su reserva AHORA!
+            </Button>
+          </Container>
+          <Box sx={{
+            position: 'relative',
+            mt: 10,
+          }}>
+            <PriceCalculatorComponent></PriceCalculatorComponent>
+          </Box>
 
-            <Box sx={{
-              position: 'relative',
-              mt: 10,
-            }}>
-              <PriceCalculatorComponent></PriceCalculatorComponent>
-            </Box>
+        </main >
+      </Container >
 
-          </main>
-        </Container >
-
-        <Footer
-          title="Roomplanner"
-          description="Hotel Cinco estrellas, Medellin, Antioquia "
-        />
-      </>
-    );
-  } else {
-    return (
-      <>
-        <Header title="ROOMPLANNER" />
-        <CssBaseline />
-        <Container className='h-full' >
-
-          <main>
-
-            <MainFeaturedPost post={mainFeaturedPost} />
-
-            <Grid container className='flex flex-col items-center pb-8 underline '>
-              <Typography variant='h4' className='font-serif'>¡Descubre todos los tipos de habitación que tenemos para tí!</Typography>
-            </Grid>
-            <Grid container spacing={4} className=''>
-              {featuredPosts.map((post) => (
-                <FeaturedPost key={post.id} post={post} />
-              ))}
-            </Grid>
-            <Grid container spacing={0} className='pt-20'>
-              {contenidoTarjetas.map((card) => (
-                <LandingCardComponent key={card.id} title={card.title} description={card.description} image={card.image} direction={card.direction} />
-              ))}
-            </Grid>
-            {/*<Grid container spacing={5} sx={{ mt: 3 }}>
-            <Main title="From the firehose" posts={posts} />
-
-          </Grid>*/}
-
-            <Box sx={{
-              position: 'relative',
-              mt: 10,
-            }}>
-              <PriceCalculatorComponent></PriceCalculatorComponent>
-            </Box>
-
-          </main>
-        </Container >
-
-        <Footer
-          title="Roomplanner"
-          description="Hotel Cinco estrellas, Medellin, Antioquia "
-        />
-      </>
-    );
-  }
+      <Footer
+        title="Roomplanner"
+        description="Hotel Cinco estrellas, Medellin, Antioquia "
+      />
+    </>
+  );
 }
 
