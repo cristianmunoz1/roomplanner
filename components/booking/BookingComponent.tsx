@@ -46,7 +46,7 @@ export default function BookingComponent() {
                         //En vez de que quemar el correo, tomariamos el de la sesión en el momento
                         // Falta hacer el calculo para el envio del precio
                         to_name: userData.nombres,
-                        email: userData.correo,
+                        to_email: userData.correo,
                         date_entry: fechaIngreso,
                         date_exit: fechaSalida,
                         type_room: tipoHabitacion,
