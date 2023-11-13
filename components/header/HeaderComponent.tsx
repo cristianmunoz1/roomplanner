@@ -24,7 +24,7 @@ const Header = (props: HeaderProps) => {
     const handleIniciarsesionClick = () => {
         router.push('signin-page');
     };
-    
+
     const { title } = props;
 
     const [userData, setUserData] = React.useState(null);

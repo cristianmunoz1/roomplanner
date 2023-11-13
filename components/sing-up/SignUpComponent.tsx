@@ -41,6 +41,18 @@ function SignUp() {
   const [errorContrasena, setErrorContrasena] = useState(false);
   const [errorContrasena1, setErrorContrasena1] = useState(false);
   const [errores, setErrores] = useState(true);
+
+  /*   const [registerUser, setRegisterUser] = useState({
+  
+      nombres: '',
+      apellidos: '',
+      tipoDocumento: 1,
+      numeroDocumento: '',
+      correo: '',
+      telefono: '',
+      contrasena: ''
+    }) */
+
   /* Funciones para validar que los campos sean correctos */
   const validarVacio = (cadena: string): boolean => {
     if (cadena.length === 0) {
@@ -170,7 +182,7 @@ function SignUp() {
       console.log("Hay campos vacíos o tiene errores en el formulario, verifique")
     } else {
       try {
-        const response = await Axios.post('api', {
+        const response = await Axios.post('http://localhost:8090/roomplanner/api/customer/save', {
           nombres,
           apellidos,
           tipoDocumento,
