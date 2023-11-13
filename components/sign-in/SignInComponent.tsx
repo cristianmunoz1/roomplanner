@@ -15,13 +15,29 @@ import 'tailwindcss/tailwind.css';
 import Axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Container } from '@mui/material';
+import globalVariable from '../../pages/api/globalUser';
 
 const defaultTheme = createTheme();
 
+interface User {
+    nombres: string;
+    apellidos: string;
+    tipoDocumento: number;
+    numeroDocumento: string;
+    correo: string;
+    telefono: string;
+    contrasena: string;
+}
 
 
 
 function SignInComponent() {
+
+
+    const updateUser = (user: User) => {
+
+    }
+
     const handleSubmit = async () => {
         try {
             const response = await Axios.get(`http://localhost:8090/roomplanner/api/customer/checkcredentials/${usuario}/${password}`, {
@@ -29,8 +45,9 @@ function SignInComponent() {
             });
             if (response.status === 200) {
                 console.log("Conexión exitosa");
-                if (response.data === true) {
+                if (response.data.name === true) {
                     console.log("El usuario y la contraseña son válidos");
+
                 } else {
                     console.log(response.data, usuario, password);
                     console.log("El usuario y la contraseña NO son válidos");

@@ -11,7 +11,6 @@ import PriceCalculatorComponent from '../components/price-calculator-component/P
 import { Box, Typography } from '@mui/material';
 import contenidoTarjetas from '../const/cardsContent';
 import LandingCardComponent from '../components/landing-cards/LandingCardComponent';
-import { TRUE } from 'sass';
 import { Griffy } from 'next/font/google';
 
 
@@ -116,7 +115,7 @@ export default function Blog() {
 
         </main>
       </Container >
-      
+
       <Footer
         title="Roomplanner"
         description="Hotel Cinco estrellas, Medellin, Antioquia "
