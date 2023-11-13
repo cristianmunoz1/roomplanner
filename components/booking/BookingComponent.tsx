@@ -29,6 +29,7 @@ export default function BookingComponent() {
 
     const handleReserva = async () => {
         try {
+
             //calculatePrice();
             /* const response = await Axios.post('api', {
                  fechaIngreso,
@@ -38,6 +39,9 @@ export default function BookingComponent() {
 
             if (200 === 200) {
                 try {
+                    if(userData === null){
+                        console.log(userData);
+                    }else{
                     let templateParams = {
                         //En vez de que quemar el correo, tomariamos el de la sesión en el momento
                         // Falta hacer el calculo para el envio del precio
@@ -55,6 +59,7 @@ export default function BookingComponent() {
                         }, function (error) {
                             alert('Algo ha fallado')
                         })
+                    }
                 } catch (error) {
                     console.log("~file: index.js:12 ~ onSubmit ~error:", error)
                 }
