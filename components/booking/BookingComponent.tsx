@@ -41,8 +41,8 @@ export default function BookingComponent() {
                     let templateParams = {
                         //En vez de que quemar el correo, tomariamos el de la sesión en el momento
                         // Falta hacer el calculo para el envio del precio
-                        to_name: 
-                        email: 'hotelroomplanner@gmail.com',
+                        to_name: userData.nombres,
+                        email: userData.correo,
                         date_entry: fechaIngreso,
                         date_exit: fechaSalida,
                         type_room: tipoHabitacion,
@@ -104,6 +104,22 @@ export default function BookingComponent() {
         setPrecioActual(precio);
 
     };
+
+    const [userData, setUserData] = React.useState(null);
+
+    React.useEffect(() => {
+        const user = sessionStorage.getItem('userData')
+        if (user) {
+            setUserData(JSON.parse(user));
+        }
+
+    }, []
+    )
+
+    React.useEffect(() => {
+        console.log(userData),
+            [userData]
+    })
 
     return (
         <Paper elevation={3} style={{ padding: '16px', alignItems: 'center', textAlign: 'center' }}>
