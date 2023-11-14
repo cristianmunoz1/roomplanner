@@ -7,8 +7,9 @@ import Image from 'next/image';
 import 'tailwindcss/tailwind.css';
 import Link from '@mui/material/Link';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import MenuIcon from '@mui/icons-material/Menu';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 interface HeaderProps {
     title: string;
@@ -20,6 +21,20 @@ const Header = (props: HeaderProps) => {
 
     const handleRegistrarseClick = () => {
         router.push('signup-page');
+    };
+    //implementación del menu
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+
+    const handleMenu = () =>{
+        
     };
 
     const handleIniciarsesionClick = () => {
@@ -97,9 +112,25 @@ const Header = (props: HeaderProps) => {
                     <Typography className='font-bold text-xl mr-3'>
                         Hola, {userData.nombres}
                     </Typography>
-                    <Link href='view-reserve'>
-                        <ArrowCircleRightIcon className='text-blue-500 text-4xl' />
-                    </Link>
+                    
+                        <ArrowCircleRightIcon onClick={handleMenu} className='text-blue-500 text-4xl' 
+                        id="basic-button"
+                        aria-controls={open ? 'basic-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : undefined}/>
+                    <Menu
+                        id="basic-menu"
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                        MenuListProps={{
+                            'aria-labelledby': 'basic-button',
+                        }}
+                    >
+                        <MenuItem onClick={handleClose}>Profile</MenuItem>
+                        <MenuItem onClick={handleClose}>My account</MenuItem>
+                        <MenuItem onClick={handleClose}>Logout</MenuItem>
+                    </Menu>
                 </Toolbar>
             </React.Fragment >
         );
