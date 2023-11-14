@@ -34,10 +34,10 @@ export default function BookingComponent() {
 
     useEffect(() => {
         setBooking({
-            idUser: userData.numeroDocumento,
-            fechaIngreso: fecha1Parseada,
-            fechaSalida: fecha2Parseada,
-            precio: precioNumero,
+            customerId: userData.numeroDocumento,
+            date1: fecha1Parseada,
+            date2: fecha2Parseada,
+            price: precioNumero,
 
         })
             , [fechaIngreso, fechaSalida, tipoHabitacion]
@@ -72,10 +72,7 @@ export default function BookingComponent() {
             console.log(typeof (fechaSalida), fechaSalida)
             console.log(typeof (precioNumero), precioNumero)
             console.log(booking)
-            response = await Axios.post('http://localhost:8090/roomplanner/api/booking/save', {
-                booking,
-                idUser
-            });
+            response = await Axios.post('http://localhost:8090/roomplanner/api/booking/save', { booking, idUser });
 
 
 
