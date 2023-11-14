@@ -1,30 +1,31 @@
 import * as React from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@material-ui/data-grid';
 import 'tailwindcss/tailwind.css'
+import axios from 'axios';
 
 
 const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 90 },
     {
-        field: 'firstName',
-        headerName: 'Nombres',
+        field: 'bookingId',
+        headerName: 'Identificador',
         width: 200,
         editable: true,
     },
     {
-        field: 'lastName',
-        headerName: 'Apellidos',
+        field: 'customerId',
+        headerName: 'Id del Cliente',
         width: 200,
         editable: true,
     },
     {
-        field: 'dateEntry',
+        field: 'date1',
         headerName: 'Fecha de Ingreso',
         width: 200,
         editable: true,
     },
     {
-        field: 'dateExit',
+        field: 'date2',
         headerName: 'Fecha de Salida',
         width: 200,
         editable: true,
@@ -36,7 +37,7 @@ const columns: GridColDef[] = [
         width: 200,
         editable: true,
     },
-    
+
 ];
 
 const rows = [
@@ -52,12 +53,26 @@ const rows = [
 ];
 
 export default function DataTable() {
+
+    const [reservas, setReservas] = React.useState([])
+
+    React.useEffect(() => {
+        const response = axios.get('http://localhost:8090/roomplanner/api/booking/all').then((response) => {
+            const responseId = response.data.map((reserva, index) => ({
+                ...reserva,
+                id: index + 1,
+            }));
+            setReservas(responseId)
+            console.log(responseId)
+        })
+    }, [])
+
     return (
         <div style={{ height: 400, width: '100%' }}>
             <DataGrid className='flex'
-                rows={rows}
+                rows={reservas}
                 columns={columns}
-                pageSize={5}
+                pageSize={20}
                 checkboxSelection
                 disableSelectionOnClick
             />
