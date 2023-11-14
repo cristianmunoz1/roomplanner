@@ -8,6 +8,7 @@ import 'tailwindcss/tailwind.css';
 import Link from '@mui/material/Link';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MenuIcon from '@mui/icons-material/Menu';
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 
 interface HeaderProps {
     title: string;
@@ -96,7 +97,9 @@ const Header = (props: HeaderProps) => {
                     <Typography className='font-bold text-xl mr-3'>
                         Hola, {userData.nombres}
                     </Typography>
-                    <MenuIcon></MenuIcon>
+                    <Link href='view-reserve'>
+                        <ArrowCircleRightIcon className='text-blue-500 text-4xl' />
+                    </Link>
                 </Toolbar>
             </React.Fragment >
         );
