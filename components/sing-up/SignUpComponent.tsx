@@ -16,6 +16,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Axios from 'axios';
 import { useEffect, useState } from 'react';
+import { set } from 'date-fns';
+import { Alert, Snackbar } from '@mui/material';
 
 
 const defaultTheme = createTheme();
@@ -31,6 +33,8 @@ function SignUp() {
   const [telefono, setTelefono] = useState('');
   const [contrasena, setContrasena] = useState('');
   const [contrasena1, setContrasena1] = useState('');
+  const [admin, setAdmin] = useState(false);
+  const [state, setState] = useState(true)
 
   /* Hooks para guardar errores en los campos */
   const [errorNombres, setErrorNombres] = useState(false);
@@ -41,17 +45,35 @@ function SignUp() {
   const [errorContrasena, setErrorContrasena] = useState(false);
   const [errorContrasena1, setErrorContrasena1] = useState(false);
   const [errores, setErrores] = useState(true);
+  const [errorDuplicados, setErrorDuplicados] = useState(false)
 
-  /*   const [registerUser, setRegisterUser] = useState({
-  
-      nombres: '',
-      apellidos: '',
-      tipoDocumento: 1,
-      numeroDocumento: '',
-      correo: '',
-      telefono: '',
-      contrasena: ''
-    }) */
+  const [registerUser, setRegisterUser] = useState({
+
+    id: '1007460166',
+    idType: 2,
+    names: 'Cristian',
+    surnames: 'Munoz',
+    mail: 'satanas@gmail.com',
+    phone: '3154987911',
+    password: 'Cristian123',
+    state: false,
+    admin: false
+  })
+
+  useEffect(() => {
+    setRegisterUser({
+      id: numeroDocumento,
+      idType: tipoDocumento,
+      names: nombres,
+      surnames: apellidos,
+      mail: correo,
+      phone: telefono,
+      password: contrasena,
+      state: false,
+      admin: false
+    }),
+      [nombres, apellidos, tipoDocumento, numeroDocumento, correo, telefono, contrasena, contrasena1]
+  });
 
   /* Funciones para validar que los campos sean correctos */
   const validarVacio = (cadena: string): boolean => {
@@ -182,22 +204,19 @@ function SignUp() {
       console.log("Hay campos vacíos o tiene errores en el formulario, verifique")
     } else {
       try {
-        const response = await Axios.post('http://localhost:8090/roomplanner/api/customer/save', {
-          nombres,
-          apellidos,
-          tipoDocumento,
-          numeroDocumento,
-          correo,
-          telefono,
-          contrasena,
-        });
-        if (response.status === 200) {
-          console.log('Registro exitoso', errores);
+
+        const response = await Axios.post('http://localhost:8090/roomplanner/api/customer/save', registerUser);
+        console.log(response.status, 'Este es el código de respueta de la API')
+        if (response.status === 201) {
+          console.log('Registro existoso :)');
         } else {
           console.log('Error al realizar el registro')
         }
       } catch (error) {
-        console.log("Este es el error en el registro ", error);
+        if (error.request.status === 500) {
+          console.log("El usuario ya está creado en la plataforma")
+          setErrorDuplicados(true);
+        }
       }
     }
   }
@@ -250,6 +269,11 @@ function SignUp() {
 
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
+        <Snackbar open={errorDuplicados} autoHideDuration={6000}>
+          <Alert severity="error" sx={{ width: '100%' }}>
+            El usuario ya existe en la plataforma. Inicie Sesión
+          </Alert>
+        </Snackbar>
         <CssBaseline />
 
         <Box

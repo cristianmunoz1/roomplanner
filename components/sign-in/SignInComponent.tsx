@@ -39,9 +39,7 @@ function SignInComponent() {
 
     const handleSubmit = async () => {
         try {
-            const response = await Axios.get(`http://localhost:8090/roomplanner/api/customer/checkcredentials/${usuario}/${password}`, {
-
-            });
+            const response = await Axios.get(`http://localhost:8090/roomplanner/api/customer/checkcredentials/${usuario}/${password}`, {});
             if (response.status === 200) {
                 console.log("Conexión exitosa");
                 if (response.data != null) {
