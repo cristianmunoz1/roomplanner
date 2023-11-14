@@ -59,7 +59,7 @@ export default function DataTable() {
 
     React.useEffect(() => {
         const user = JSON.parse(sessionStorage.getItem('userData'));
-        const response = axios.get(`http://localhost:8090/roomplanner/api/booking/${user.id}`).then((response) => {
+        const response = axios.get(`http://localhost:8090/roomplanner/api/booking/${user.numeroDocumento}`).then((response) => {
             const responseId = response.data.map((reserva, index) => ({
                 ...reserva,
                 id: index + 1,
