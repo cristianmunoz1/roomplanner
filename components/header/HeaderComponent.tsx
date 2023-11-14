@@ -49,6 +49,10 @@ const Header = (props: HeaderProps) => {
         router.push('/reserves-page')
     }
 
+    const handleMyViewReserves =() =>{
+        router.push('/my-reserves-page')
+    }
+
     const { title } = props;
 
     const [userData, setUserData] = React.useState(null);
@@ -135,7 +139,7 @@ const Header = (props: HeaderProps) => {
                             'aria-labelledby': 'basic-button',
                         }}
                     >
-                        <MenuItem onClick={handleClose}>Mis reservas</MenuItem>
+                        <MenuItem onClick={handleMyViewReserves}>Mis reservas</MenuItem>
                         <MenuItem onClick={handleViewReserves}>Reservas</MenuItem>
                         <MenuItem onClick={handleCloseSession}>Logout</MenuItem>
                     </Menu>
