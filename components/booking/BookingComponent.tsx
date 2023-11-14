@@ -7,11 +7,11 @@ import Footer from '../footer/FooterComponent';
 
 export default function BookingComponent() {
 
-    interface bookingI {
-        idUser: string;
-        fechaIngreso: Date,
-        fechaSalida: Date,
-        precio: number,
+    type booking = {
+        customerId: string;
+        date1: string,
+        date2: string,
+        price: number,
     }
 
     const preciosHabitaciones = {
@@ -30,7 +30,13 @@ export default function BookingComponent() {
     const [fecha2Parseada, setFecha2Parseada] = useState('');
     const [precioNumero, setPrecioNumero] = useState(0);
     const [userId, setUserId] = useState("");
-    const [booking, setBooking] = useState({});
+
+    const [booking, setBooking] = useState<booking>({
+        customerId: '',
+        date1: '',
+        date2: '',
+        price: 0
+    });
 
     useEffect(() => {
         setBooking({
@@ -38,10 +44,10 @@ export default function BookingComponent() {
             date1: fecha1Parseada,
             date2: fecha2Parseada,
             price: precioNumero,
+        }),
+            [fechaIngreso, fechaSalida, tipoHabitacion, precioActual]
+    });
 
-        })
-            , [fechaIngreso, fechaSalida, tipoHabitacion]
-    })
 
     useEffect(() => {
         setFecha1Parseada(fechaIngreso.toISOString().split('T')[0]),
@@ -64,7 +70,7 @@ export default function BookingComponent() {
     const handleReserva = async () => {
         try {
 
-            let response: any = {}
+            /* let response: any = {} */
 
             const idUser = userData.numeroDocumento
             console.log(typeof (idUser), idUser)
@@ -72,11 +78,11 @@ export default function BookingComponent() {
             console.log(typeof (fechaSalida), fechaSalida)
             console.log(typeof (precioNumero), precioNumero)
             console.log(booking)
-            response = await Axios.post('http://localhost:8090/roomplanner/api/booking/save', { booking, idUser });
+            const response = await Axios.post('http://localhost:8090/roomplanner/api/booking/save', booking);
 
 
-
-            if (response.status === 200) {
+            console.log(response.status, " Este es el codigo de respuesta de la API")
+            if (response.status === 201) {
                 try {
                     if (userData === null) {
                     } else {
@@ -91,12 +97,12 @@ export default function BookingComponent() {
                             precio: precioActual,
                         }
 
-                        /* emailjs.send('service_4erds6r', 'template_mub21rj', templateParams, 'u9tf-R5IZ4kBQ_Ylf')
+                        emailjs.send('service_4erds6r', 'template_mub21rj', templateParams, 'u9tf-R5IZ4kBQ_Ylf')
                             .then(function (response) {
                                 alert('Reserva realizada con Exito')
                             }, function (error) {
                                 alert('Algo ha fallado')
-                            }) */
+                            })
                     }
                 } catch (error) {
                     console.log("~file: index.js:12 ~ onSubmit ~error:", error)
