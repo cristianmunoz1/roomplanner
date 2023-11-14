@@ -259,13 +259,8 @@ export default function BookingComponent() {
                     </Grid>
                 </Grid>
                 <Container className='content-center w-max flex '>
-                    <Grid item xs={6}>
-                        <Button className='text-white bg-sky-600 hover:bg-sky-700 w-max' onClick={calculatePrice}>
-                            Calcular Precio
-                        </Button>
-                    </Grid>
                     <Grid item xs={5}>
-                        <Button className='text-white bg-sky-600 hover:bg-sky-700 w-max' onClick={handleReserva}>
+                        <Button className='text-white bg-sky-600 hover:bg-sky-700 w-max p-4' onClick={handleReserva}>
                             Realizar reserva
                         </Button>
                     </Grid>
