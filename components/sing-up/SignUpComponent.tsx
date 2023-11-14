@@ -46,6 +46,7 @@ function SignUp() {
   const [errorContrasena1, setErrorContrasena1] = useState(false);
   const [errores, setErrores] = useState(true);
   const [errorDuplicados, setErrorDuplicados] = useState(false)
+  const [registrado, setRegistrado] = useState(false);
 
   const [registerUser, setRegisterUser] = useState({
 
@@ -208,7 +209,7 @@ function SignUp() {
         const response = await Axios.post('http://localhost:8090/roomplanner/api/customer/save', registerUser);
         console.log(response.status, 'Este es el código de respueta de la API')
         if (response.status === 201) {
-          console.log('Registro existoso :)');
+          setRegistrado(true);
         } else {
           console.log('Error al realizar el registro')
         }
@@ -272,6 +273,12 @@ function SignUp() {
         <Snackbar open={errorDuplicados} autoHideDuration={6000}>
           <Alert severity="error" sx={{ width: '100%' }}>
             El usuario ya existe en la plataforma. Inicie Sesión
+          </Alert>
+        </Snackbar>
+
+        <Snackbar open={registrado} autoHideDuration={6000}>
+          <Alert severity="success" sx={{ width: '100%' }}>
+            ¡El usuario fué registrado correctamente!
           </Alert>
         </Snackbar>
         <CssBaseline />

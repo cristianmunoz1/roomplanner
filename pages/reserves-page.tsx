@@ -7,6 +7,7 @@ import Footer from '../components/footer/FooterComponent';
 import React from 'react';
 import router, { useRouter } from 'next/router';
 import AlertSessionComponent from '../components/alertSession/AlertSessionComponent';
+import NotAdminComponent from '../components/notAdminComponent/NotAdminComponent';
 
 
 
@@ -65,7 +66,7 @@ export default function ReservesPage() {
         return (
             <Container>
                 <Header title="ROOMPLANNER"></Header>
-                < AlertSessionComponent />
+                < NotAdminComponent />
             </Container>
         )
     }
