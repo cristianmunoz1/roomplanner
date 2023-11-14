@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, Paper, Typography, TextField, Select, MenuItem, Button, Container } from '@mui/material';
+import { Grid, Paper, Typography, TextField, Select, MenuItem, Button, Container, Snackbar, Alert } from '@mui/material';
 import { differenceInCalendarDays, format, addDays } from 'date-fns';
 import Axios from 'axios';
 import emailjs from '@emailjs/browser'
@@ -30,6 +30,7 @@ export default function BookingComponent() {
     const [fecha2Parseada, setFecha2Parseada] = useState('');
     const [precioNumero, setPrecioNumero] = useState(0);
     const [userId, setUserId] = useState("");
+    const [reservaExitosa, setReservaExitosa] = useState(false);
 
     const [booking, setBooking] = useState<booking>({
         customerId: '',
@@ -99,7 +100,7 @@ export default function BookingComponent() {
 
                         emailjs.send('service_4erds6r', 'template_mub21rj', templateParams, 'u9tf-R5IZ4kBQ_Ylf')
                             .then(function (response) {
-                                alert('Reserva realizada con Exito')
+                                setReservaExitosa(true);
                             }, function (error) {
                                 alert('Algo ha fallado')
                             })
@@ -120,6 +121,14 @@ export default function BookingComponent() {
         const fechaIngreso = new Date(event.target.value);
         setFechaIngreso(addDays(fechaIngreso, 1));
         updateDiasSeleccionados(fechaIngreso, fechaSalida);
+    };
+
+    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setReservaExitosa(false);
     };
 
     const handleInputFechaSalida = (event) => {
@@ -177,6 +186,11 @@ export default function BookingComponent() {
                 ¡Realice su reserva ahora!
             </Typography>
 
+            <Snackbar open={reservaExitosa} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    Reserva realizada con éxito
+                </Alert>
+            </Snackbar>
             <Grid container spacing={2}>
                 <Grid item xs={6}>
 
