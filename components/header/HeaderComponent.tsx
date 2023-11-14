@@ -44,6 +44,10 @@ const Header = (props: HeaderProps) => {
     const handleIniciarsesionClick = () => {
         router.push('signin-page');
     };
+    
+    const handleViewReserves = () =>{
+        router.push('/reserves')
+    }
 
     const { title } = props;
 
@@ -131,8 +135,8 @@ const Header = (props: HeaderProps) => {
                             'aria-labelledby': 'basic-button',
                         }}
                     >
-                        <MenuItem onClick={handleClose}>Profile</MenuItem>
-                        <MenuItem onClick={handleClose}>My account</MenuItem>
+                        <MenuItem onClick={handleClose}>Mis reservas</MenuItem>
+                        <MenuItem onClick={handleViewReserves}>Reservas</MenuItem>
                         <MenuItem onClick={handleCloseSession}>Logout</MenuItem>
                     </Menu>
                 </Toolbar>
