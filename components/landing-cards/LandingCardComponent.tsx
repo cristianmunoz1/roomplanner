@@ -6,7 +6,7 @@ interface landingCardProps {
     image: string;
     title: string;
     description: string;
-    /* true para tarjeta con imágen a derecha o false para tarjeta con imágen a izquierda*/
+    /* true para tarjeta con imágen a derecha o false para tarjeta con imágen a izquierda */
     direction: boolean;
 }
 

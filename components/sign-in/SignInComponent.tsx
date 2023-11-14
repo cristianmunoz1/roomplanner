@@ -26,6 +26,7 @@ interface User {
     numeroDocumento: string;
     correo: string;
     telefono: string;
+    admin: boolean
 }
 
 
@@ -51,6 +52,7 @@ function SignInComponent() {
                         numeroDocumento: response.data.id,
                         correo: response.data.mail,
                         telefono: response.data.phone,
+                        admin: response.data.admin,
                     }
 
                     sessionStorage.setItem('userData', JSON.stringify(globalUser));

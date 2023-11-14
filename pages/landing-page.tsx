@@ -68,9 +68,25 @@ const featuredPosts = [
 export default function Blog() {
 
   const router = useRouter();
+  const [userData, setUserData] = React.useState(null);
+
+  React.useEffect(() => {
+    const user = sessionStorage.getItem('userData')
+    if (user) {
+      setUserData(JSON.parse(user));
+    }
+
+  }, []
+  )
 
   const handleClick = () => {
-    router.push('booking-page');
+
+    if (userData === null) {
+      router.push('/signin-page')
+    } else {
+      router.push('/booking-page');
+    }
+
   };
   return (
     <>

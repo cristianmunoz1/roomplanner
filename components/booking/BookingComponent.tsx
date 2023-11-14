@@ -4,8 +4,22 @@ import { differenceInCalendarDays, format, addDays } from 'date-fns';
 import Axios from 'axios';
 import emailjs from '@emailjs/browser'
 import Footer from '../footer/FooterComponent';
+import { useRouter } from 'next/navigation';
 
 export default function BookingComponent() {
+
+    const router = useRouter();
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        const user1 = sessionStorage.getItem('userData')
+        if (user1 != null) {
+            setUser(user1)
+        } else {
+            router.push('signin-page')
+        }
+    }
+        , [])
 
     type booking = {
         customerId: string;
@@ -40,13 +54,18 @@ export default function BookingComponent() {
     });
 
     useEffect(() => {
-        setBooking({
-            customerId: userData.numeroDocumento,
-            date1: fecha1Parseada,
-            date2: fecha2Parseada,
-            price: precioNumero,
-        }),
-            [fechaIngreso, fechaSalida, tipoHabitacion, precioActual]
+
+        if (user === null) {
+
+        } else {
+            setBooking({
+                customerId: userData.numeroDocumento,
+                date1: fecha1Parseada,
+                date2: fecha2Parseada,
+                price: precioNumero,
+            })
+        }
+        [fechaIngreso, fechaSalida, tipoHabitacion, precioActual]
     });
 
 
@@ -259,5 +278,6 @@ export default function BookingComponent() {
             />
         </Paper >
     );
+
 };
 

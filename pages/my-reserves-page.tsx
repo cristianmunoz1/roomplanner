@@ -21,7 +21,7 @@ export default function MyReservesPage() {
                 title="Roomplanner"
                 description="Hotel Cinco estrellas, Medellin, Antioquia "
             />
-            
+
         </Container>
 
     )
