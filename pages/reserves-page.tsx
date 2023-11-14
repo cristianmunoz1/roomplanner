@@ -7,7 +7,7 @@ import Footer from '../components/footer/FooterComponent';
 
 
 
-export default function bookingPage() {
+export default function ReservesPage() {
 
     return (
         <Container maxWidth='lg'>

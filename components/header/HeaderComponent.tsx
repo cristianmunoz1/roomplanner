@@ -46,7 +46,7 @@ const Header = (props: HeaderProps) => {
     };
     
     const handleViewReserves = () =>{
-        router.push('/reserves')
+        router.push('/reserves-page')
     }
 
     const { title } = props;
