@@ -17,7 +17,6 @@ export default function ReservesPage() {
             </Typography>
             <ViewBookingComponent />
             <br />
-            <ViewBookingComponent />
             <Footer
                 title="Roomplanner"
                 description="Hotel Cinco estrellas, Medellin, Antioquia "

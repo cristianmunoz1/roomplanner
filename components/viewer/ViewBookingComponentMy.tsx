@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@material-ui/data-grid';
 import 'tailwindcss/tailwind.css'
@@ -12,12 +13,7 @@ const columns: GridColDef[] = [
         width: 200,
         editable: true,
     },
-    {
-        field: 'customerId',
-        headerName: 'Id del Cliente',
-        width: 200,
-        editable: true,
-    },
+   
     {
         field: 'date1',
         headerName: 'Fecha de Ingreso',
@@ -57,7 +53,8 @@ export default function DataTable() {
     const [reservas, setReservas] = React.useState([])
 
     React.useEffect(() => {
-        const response = axios.get('http://localhost:8090/roomplanner/api/booking/all').then((response) => {
+        const user = JSON.parse(sessionStorage.getItem('userData'));
+        const response = axios.get(`http://localhost:8090/roomplanner/api/booking/${user.id}`).then((response) => {
             const responseId = response.data.map((reserva, index) => ({
                 ...reserva,
                 id: index + 1,
