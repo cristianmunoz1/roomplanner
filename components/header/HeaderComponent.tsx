@@ -34,7 +34,7 @@ const Header = (props: HeaderProps) => {
 
     const handleCloseSession = () => {
         sessionStorage.setItem('userData', null)
-        location.reload();
+        router.push('/')
     }
 
     const handleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -44,12 +44,12 @@ const Header = (props: HeaderProps) => {
     const handleIniciarsesionClick = () => {
         router.push('signin-page');
     };
-    
-    const handleViewReserves = () =>{
+
+    const handleViewReserves = () => {
         router.push('/reserves-page')
     }
 
-    const handleMyViewReserves =() =>{
+    const handleMyViewReserves = () => {
         router.push('/my-reserves-page')
     }
 

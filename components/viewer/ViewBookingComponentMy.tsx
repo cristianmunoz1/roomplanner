@@ -65,7 +65,6 @@ export default function DataTable() {
                 id: index + 1,
             }));
             setReservas(responseId)
-            console.log(responseId)
         })
     }, [])
 
