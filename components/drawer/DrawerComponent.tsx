@@ -94,6 +94,8 @@ export default function PersistentDrawerLeft() {
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
             <AppBar position="fixed" open={open}>
+
+                {/*Título */}
                 <Toolbar>
                     <IconButton
                         color="inherit"
@@ -109,6 +111,8 @@ export default function PersistentDrawerLeft() {
                     </Typography>
                 </Toolbar>
             </AppBar>
+
+
             <Drawer
                 sx={{
                     width: drawerWidth,
@@ -147,30 +151,30 @@ export default function PersistentDrawerLeft() {
                         <ListItem key={text} disablePadding>
                             <ListItemButton>
                                 <ListItemIcon>
-                                    {index === 0 ? <AutoStoriesOutlinedIcon/>: <BookmarksOutlinedIcon /> }
+                                    {index === 0 ? <AutoStoriesOutlinedIcon /> : <BookmarksOutlinedIcon />}
                                 </ListItemIcon>
                                 <ListItemText primary={text} />
                             </ListItemButton>
                         </ListItem>
-                        
+
                     ))}
                 </List>
                 <Divider />
-                
+
             </Drawer>
             <Main open={open}>
                 <DrawerHeader />
                 <Typography className='text-2xl'>
                     A continuación el usuario con rol administrador podra visualizar las reservas actuales hasta el momento, dada por la siguiente tabla que contienne la estructura de datos, planetada en el formulario de realizar reserva:
                 </Typography>
-                
-                <br/>
+
+                <br />
                 <ViewBookingComponent />
                 <Footer
                     title="Roomplanner"
                     description="Hotel Cinco estrellas, Medellin, Antioquia "
                 />
-            </Main> 
+            </Main>
         </Box>
     );
 }

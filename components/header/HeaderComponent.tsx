@@ -10,6 +10,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { Container } from '@mui/material';
 
 interface HeaderProps {
     title: string;
@@ -25,16 +26,19 @@ const Header = (props: HeaderProps) => {
     //implementación del menu
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
+
     const handleClose = () => {
         setAnchorEl(null);
     };
 
 
-    const handleMenu = () =>{
-        
+    const handleCloseSession = () => {
+        sessionStorage.setItem('userData', null)
+        location.reload();
+    }
+
+    const handleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget);
     };
 
     const handleIniciarsesionClick = () => {
@@ -112,12 +116,12 @@ const Header = (props: HeaderProps) => {
                     <Typography className='font-bold text-xl mr-3'>
                         Hola, {userData.nombres}
                     </Typography>
-                    
-                        <ArrowCircleRightIcon onClick={handleMenu} className='text-blue-500 text-4xl' 
+
+                    <ArrowCircleRightIcon onClick={handleMenu} className='text-blue-500 text-4xl cursor-pointer'
                         id="basic-button"
                         aria-controls={open ? 'basic-menu' : undefined}
                         aria-haspopup="true"
-                        aria-expanded={open ? 'true' : undefined}/>
+                        aria-expanded={open ? 'true' : undefined} />
                     <Menu
                         id="basic-menu"
                         anchorEl={anchorEl}
@@ -129,7 +133,7 @@ const Header = (props: HeaderProps) => {
                     >
                         <MenuItem onClick={handleClose}>Profile</MenuItem>
                         <MenuItem onClick={handleClose}>My account</MenuItem>
-                        <MenuItem onClick={handleClose}>Logout</MenuItem>
+                        <MenuItem onClick={handleCloseSession}>Logout</MenuItem>
                     </Menu>
                 </Toolbar>
             </React.Fragment >
