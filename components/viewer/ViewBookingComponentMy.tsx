@@ -13,7 +13,12 @@ const columns: GridColDef[] = [
         width: 200,
         editable: true,
     },
-   
+    {
+        field: 'customerId',
+        headerName: 'Id del Cliente',
+        width: 200,
+        editable: true,
+    },
     {
         field: 'date1',
         headerName: 'Fecha de Ingreso',
